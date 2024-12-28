@@ -17,6 +17,14 @@ import { Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Form, FormControl } from '@/components/ui/form';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 
 
 type Product = {
@@ -214,10 +222,11 @@ export default function Home() {
         </CardHeader>
        <CardContent className='flex flex-col items-center'>
         {error ? <Card className='bg-[#ab4b4b] mb-5 flex items-center flex-col h-11 border-red-600'><CardContent className='font-SatoshiBold text-white mt-1.5'>{errormsg}</CardContent></Card> : ''}
-          { o ? <div className="lds-dual-ring"></div>  : <Label htmlFor='fileinput' className='cursor-pointer flex flex-row justify-center items-center bg-white p-3 rounded-lg'>
+          { o ? <div className="lds-dual-ring"></div>  : <><Label htmlFor='fileinput' className='cursor-pointer flex flex-row justify-center items-center bg-white p-3 rounded-lg'>
             
             
-             <Upload className='bg-white cursor-pointer'></Upload>Upload Image</Label> }
+             <Upload className='bg-white cursor-pointer'></Upload>Upload Image</Label>
+             {!image ? <div></div>: <Dialog><DialogTrigger asChild><Button className='border border-white mt-3'>Current Image</Button></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Current Image</DialogTitle><img alt='' src={image as string}></img></DialogHeader></DialogContent></Dialog>} </>}
          {o ? "": <form className='flex flex-col items-center' onSubmit={callApi}>
           
               <div className='flex flex-col items-center'>
