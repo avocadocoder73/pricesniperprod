@@ -74,7 +74,7 @@ export default function Home() {
      
   }, [])
 
-  const callApi = (event : any) => {
+  const callApi = async (event : any) => {
     setError(false)
     setO(true)
     event.preventDefault()
@@ -95,11 +95,11 @@ export default function Home() {
     
     event.preventDefault()
     let payload = image
-
-    fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getproducts", {method:"POST", headers: { "Content-Type": "text/plain"}, body:payload}).then(async(res) => 
+    var data;
+    await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getproducts", {method:"POST", headers: { "Content-Type": "text/plain"}, body:payload}).then(async(res) => 
     {
       
-      let data = await res.text()
+       data = await res.text()
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
 
       
@@ -132,14 +132,15 @@ export default function Home() {
       
       */
       
-     router.push(`/search/${data}`)
+     
       
      setO(false)
     }
     
     ).catch((err) => {console.log(err); setError(true);
       setErrorMsg("Failed to fetch products. Check console for more")})
-  
+    console.log(data)
+    router.push(`/search/${data}`)
   }
 
   const setImg = (event : any) => {
@@ -158,15 +159,15 @@ export default function Home() {
     }
   };
 
-  const tiktokURL = (event : any) => {
+  const tiktokURL = async(event : any) => {
     
-    
-    fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/tiktoklink", {method:"POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async(res) => 
+    var data
+    await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/tiktoklink", {method:"POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async(res) => 
     {
       
-      let data = await res.text()
+      data = await res.text()
 
-      console.log(data)
+      
       
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
      
@@ -197,7 +198,7 @@ export default function Home() {
 
       
 
-      router.push(`/search/${data}`)
+      
       
      setO(false)
       
@@ -206,8 +207,8 @@ export default function Home() {
     ).catch((err) => {console.log(err); setError(true);
       setErrorMsg("Failed to fetch products. Check console for more")})
   
-  
-
+      console.log(data)
+    router.push(`/search/${data}`)
   }
 
 

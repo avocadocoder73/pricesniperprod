@@ -65,8 +65,7 @@ export default function Search()
           fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getiddata", {method:"POST", headers: { "Content-Type": "text/plain"}, body:base64String}).then(async(res) => {
 
             let data = await res.json()
-            data = data[0].data
-
+            console.log(res)
             data = data.filter((item : Product) => (item).price != null ) as []
 
             data = data.filter((item : Product) => (item).img != "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==") as []
