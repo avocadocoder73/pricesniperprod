@@ -7,23 +7,40 @@ import '../../app/globals.css'
 
 
 export type Entry = {
-    company? : String,
-    item? : String
-    Image? : HTMLImageElement,
-    Price? : String
-    Link? : String,
+    companyname? : String,
+    title? : String
+    img? : HTMLImageElement,
+    price? : String
+    productlink? : String,
+    companyimg? : String
 
 }
 
 
 export const columns : ColumnDef<Entry>[] = [
+     {
+        accessorKey: "img",
+        header: "",
+        cell: (props) => {
+             const imgUrl = (props.getValue() as string)
+             
+            return(
+                
+            <img
+                src={imgUrl}
+                alt="Image description"
+                className="w-full h-full object-contain"
+                
+                />)
+        }
+    },
     {
-        accessorKey: "companyname",
+        accessorKey: "companyname",        
         header: ({column}) => {
 
             return (
                    <Button
-                    className="text-white"
+                    className="text-white bg-[#f48889] ml-0 md:text-lg  text-xs"
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
@@ -33,44 +50,27 @@ export const columns : ColumnDef<Entry>[] = [
             )
 
         },
-        cell: (props) => {
+        cell: ({row}) => {
             
-            let data = (props.getValue()) as string
+            let data = row.original.companyname
+            
+            let companyimg = row.original.companyimg as string
 
-            
             return(
-                <div className="flex flex-row items-center"><p className="font-['SatoshiMed']" >{data}</p></div>
+                <div className="flex flex-row items-center"><img className="pr-[0.2vw]  md:w-auto" src={companyimg}></img><p className="font-['SatoshiMed'] text-xs md:text-xl" >{data}</p></div>
             )
         }
     },
     {
         accessorKey: "title",
-        header: ({column}) => {
-            return (<p className="text-white">Item</p>)
-        },
-        cell: (props) => {
-            const data = (props.getValue() as string)
+        header: "",
+        cell: ({row}) => {
+            
+            const data = row.original.title
+            
             return(
-                <p className="font-['SatoshiMed']">{data}</p>
+                <p className="font-['SatoshiMed'] text-xs md:text-4xl">{data}</p>
             )
-        }
-    },
-    {
-        accessorKey: "img",
-        header: ({column}) => {
-            return (<p className="text-white">Image</p>)
-        },
-        cell: (props) => {
-             const imgUrl = (props.getValue() as string)
-             
-            return(
-                
-            <img
-            src={imgUrl}
-            style={{width:"100px", height:"100px", objectFit: 'cover' }}
-            >
-                
-            </img>)
         }
     },
     {
@@ -79,7 +79,7 @@ export const columns : ColumnDef<Entry>[] = [
 
             return (
                    <Button
-                   className="text-white"
+                   className="text-white bg-[#f48889] md:text-lg  text-xs"
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
@@ -89,11 +89,30 @@ export const columns : ColumnDef<Entry>[] = [
             )
 
         },
-        cell: (props) => {
+        cell: ({row}) => {
 
-            let dat = props.getValue() as string
+            let dat = row.original.price as string
+
+            let url = row.original.productlink as string
+            
+            const start = dat?.indexOf('$')
+            const end = dat?.indexOf('*')
+            if(start && end && dat)
+            {            
+                dat = dat.substr(start, end - start)
+            }
+
+           
+
+            //<Link className="font-['SatoshiMed']" style={{height:"100px", width:"100px"}} href={url}>{url}</Link>
+
             return (
-            <p className="font-['SatoshiMed']">{dat}</p>
+            <div className="flex flex-row justify-between h-full items-end"><p className="font-['SatoshiMed'] ml-[0.2vw] md:text-5xl underline italic font-bold text-xs leading-none">{dat}</p>
+            <Button  className="bg-[#f48889] font-SB border-white border-2 md:h-[3.1rem] text-[2vw] md:text-3xl " asChild>
+                <Link href={url}>View</Link>
+            </Button>
+            
+            </div>
             )
         },
         sortingFn: (rowA, rowB, columnId) => {
@@ -105,25 +124,5 @@ export const columns : ColumnDef<Entry>[] = [
             return priceA - priceB;
         }
     },
-    {
-        accessorKey: "productlink",
-        header: ({column}) => {
-            return (<p className="text-white">Link</p>)
-        },
-        cell: (props) => {
-            let url = (props.getValue() as string)
-            
-            
-
-            if(url.includes("temu"))
-            {
-                url = url + "?&_x_ads_channel=kol_affiliate&_x_campaign=affiliate&_x_cid=2045100270"
-            }
-
-            //<Link className="font-['SatoshiMed']" style={{height:"100px", width:"100px"}} href={url}>{url}</Link>
-            return(<Button asChild>
-                <Link className="font-['SatoshiMed']" style={{height:"50%", width:"100px"}} href={url}>Buy</Link>
-            </Button>)
-        }
-    }
+   
 ]

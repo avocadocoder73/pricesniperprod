@@ -1,7 +1,4 @@
 'use client'
-import Image from 'next/image'
-import img from './images/agent.png'
-import prev from './images/preview.png'
 import {
   Card,
   CardContent,
@@ -17,16 +14,24 @@ import { Upload } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Form, FormControl } from '@/components/ui/form';
+import Searching from './images/search'
+import Clipboard from './images/clip'
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-
-
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
+import Peach from './images/peach'
+import Link from 'next/link'
+import Step from '@/components/custom/steps'
+import Results from './images/step1'
+import Bag from './images/bag'
+import { LoadingSpinner } from "@/components/ui/spinner";
+import { Image } from "lucide-react";
+import { Search } from "lucide-react";
 type Product = {
   companyimg: string
   companyname : string;
@@ -46,12 +51,10 @@ export default function Home() {
   
   
   const [o, setO] = useState(false)
-  const [error, setError] = useState(false)
-  const [errormsg, setErrorMsg] = useState('')
-  const [image, setImage] = useState<string | null>(null);
+  const [url, setURL] = useState('')
   const [tiktokURLdat, settiktokURL] = useState('')
   const [affil, setAffil] = useState<Record<string, any>>({})
-
+  const [trending, setTrending] = useState<JSX.Element[]>([]) 
 
   useEffect(() => {
 
@@ -70,93 +73,106 @@ export default function Home() {
           setAffil(newAffil)
             
         })
-      
+      fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/trending").then(async(res) => {
+          let resp = await res.json()
+          console.log(resp)
+          for (let i = 0; i < resp.length; i++)
+          {
+            let dat = resp[i].data.find((item : any) => item.img)
+            console.log(dat)
+            
+            setTrending((trending : any) => [...trending, <a href={`/search/${resp[i].id}`} target="_blank" rel="noopener noreferrer"><img style={{borderRadius:"10%"}} className="h-full w-4/5 border-[0.2vw] border-[#fcd5ce]" src={dat.img} alt="Trending Item" /></a>]); 
+            
+          }
+         
+      })
      
   }, [])
 
+
+
+
   const callApi = async (event : any) => {
-    setError(false)
+    
+    
     setO(true)
-    event.preventDefault()
+    let payload = (await setImg(event)) as string
+    try {
+
+    
+    
     if(tiktokURLdat.toLowerCase().includes("https://www.tiktok.com/"))
     {
+      
       tiktokURL(tiktokURLdat)
-      setO(true)
+     
       return
     }
     
-    if (image == null)
+    if (payload == null)
     {
-      setError(true)
-      setErrorMsg("Image not set for search")
-      setO(false)
-      return
+      
+      
+     
+      throw new Error("IMAGE NOT SET")
     }
     
-    event.preventDefault()
-    let payload = image
+    
+    
     var data;
+    console.log("HERE4")
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getproducts", {method:"POST", headers: { "Content-Type": "text/plain"}, body:payload}).then(async(res) => 
     {
       
        data = await res.text()
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
-
+      console.log(data)
       
-      /*
-      data = data.filter((item) => (item as any).price != null ) as []
-
-      data = data.filter((item) => (item as any).img != "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==") as []
-
-      data = data.filter((item) => (item as any).price.includes("$")) as []
-
-      data = data.map(item => {
-        let updatedItem = { ...item };
-        for (const key in affil) {
-            if (updatedItem.productlink.toLowerCase().includes(key)) {
-                updatedItem.productlink = updatedItem.productlink + affil[key] 
-            }
-        }
-        return updatedItem;
-        });
-
-      const compressed = pako.deflate(JSON.stringify(data));
-
-      let base64Encoded = Buffer.from(compressed).toString('base64')
-      
-      base64Encoded = base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-      
-
-    
-    
-      
-      */
       
      
       
-     setO(false)
+     
     }
     
-    ).catch((err) => {console.log(err); setError(true);
-      setErrorMsg("Failed to fetch products. Check console for more")})
+    ).catch((err) => {console.log(err);
+     })
     console.log(data)
     router.push(`/search/${data}`)
+
+    
+    return
+    }
+    catch(err) {
+      setO(false)
+      console.log(err)
+    }
+    finally {
+      
+    }
   }
 
   const setImg = (event : any) => {
-
-    const file = event.target.files[0]  
-     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          const base64 = reader.result.toString(); 
-          setImage(base64);
-          
-        }
-      };
-      reader.readAsDataURL(file); 
+    
+    return new Promise((resolve, reject) => {
+    const file = event.target.files[0];
+    if (!file) {
+      reject(new Error("No file selected"));
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      if (reader.result) {
+        const base64 = reader.result.toString();
+        resolve(base64); // Resolve the promise with the base64 string
+      } else {
+        reject(new Error("Failed to read file"));
+      }
+    };
+
+    reader.onerror = () => reject(new Error("FileReader error"));
+    reader.readAsDataURL(file);
+  });
   };
 
   const tiktokURL = async(event : any) => {
@@ -167,7 +183,7 @@ export default function Home() {
       
       data = await res.text()
 
-      
+      console.log(data)
       
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
      
@@ -204,53 +220,101 @@ export default function Home() {
       
     }
     
-    ).catch((err) => {console.log(err); setError(true);
-      setErrorMsg("Failed to fetch products. Check console for more")})
+    ).catch((err) => {console.log(err); 
+     })
   
       console.log(data)
     router.push(`/search/${data}`)
   }
 
-
+//className="-ml-4 max-w-5xl flex flex-row mt-[3vw] justify-center"
 
   return (
-    <div className='h-full'>
-   <div className='flex flex-row h-max border-b-[#334155] border-b-2 items-center p-4'><Image height={50} width={50} alt="/agent.png" src={img}></Image><p className='text-2xl text-white ml-3'>PandaLookup</p></div>
+    <div className='h-full w-full '>
+   <div className='flex h-max items-center p-4'><Peach style={{marginRight: "3%"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link></div></div>
     <Card className='flex flex-col justify-center items-center bg-clear border-none'>
-        <CardHeader className='flex flex-col items-center'>
-           <CardTitle className='text-white text-6xl w-500px h-50 flex-wrap text-center pb-10'>Savings are just a click away</CardTitle>
-           <CardDescription className='text-lg text-[#A3A3A3]'>Just upload an image of a product or type a TikTok shop link and let us do the rest!</CardDescription>
+        <CardHeader className='flex flex-row items-center'>
+           <div className='text-[#fec5bb] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Peachy</div>
+            <Peach className="w-[100px] h-[40px] md:h-[50px]" style={{marginRight:"-12px"}}></Peach>
+            <div className='text-[#fec89a] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Prices</div>
         </CardHeader>
-       <CardContent className='flex flex-col items-center'>
-        {error ? <Card className='bg-[#ab4b4b] mb-5 flex items-center flex-col h-11 border-red-600'><CardContent className='font-SatoshiBold text-white mt-1.5'>{errormsg}</CardContent></Card> : ''}
-          { o ? <div className="lds-dual-ring"></div>  : <><Label htmlFor='fileinput' className='cursor-pointer flex flex-row justify-center items-center bg-white p-3 rounded-lg'>
-            
-            
-             <Upload className='bg-white cursor-pointer'></Upload>Upload Image</Label>
-             {!image ? <div></div>: <Dialog><DialogTrigger asChild><Button className='border border-white mt-3'>Current Image</Button></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Current Image</DialogTitle><img alt='' src={image as string}></img></DialogHeader></DialogContent></Dialog>} </>}
-         {o ? "": <form className='flex flex-col items-center' onSubmit={callApi}>
-          
-              <div className='flex flex-col items-center'>
-                
-                
-                <Input  onChange={setImg} id='fileinput' accept="image/png, image/jpeg, image/jpg" className='bg-white hidden' placeholder='Upload' type='file'></Input>
-            <p className='text-white mt-5 mb-5'>Or</p>
-            <Input onChange={(e) => settiktokURL(e.target.value)}  placeholder='TikTok Shop URL' className='bg-white'></Input>
+         <CardDescription className='text-lg text-[#a5c8b3] font-SB italic'>Your shortcut to savings</CardDescription>
+       <CardContent className='flex flex-col items-center w-full'>
+        <div className='w-full flex flex-row items-center justify-center'>
+          <form className="w-full flex flex-row items-center justify-center" onSubmit={(e) => {
+            e.preventDefault()
+            tiktokURL(url)
+  }}>
+        
+          <button 
+            className="h-11 inline-flex items-center justify-center bg-[#fcd5ce] border-2 border-r-0 border-[#fec5bb] rounded-l-3xl mt-3" 
+            // Match SVG size exactly
+          >
+            <Search size={30} className="stroke-white" />
+          </button>
+       
+          <Input onChange={(e) => setURL(e.target.value)} className='bg-[#fcd5ce] mt-3 w-1/2 lg:w-2/6 h-11 rounded-none placeholder:text-white placeholder:font-MD border-t-2 border-b-2 border-l-0 border-r-0 border-[#fec5bb]' placeholder='Find cheaper prices'></Input>
+         
+          {o ? (<div className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] h-11 flex items-center"><LoadingSpinner></LoadingSpinner></div> ) :  (<label htmlFor="imgupload">
+            <Image  size={40} className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] h-11"></Image>
+          </label>) }
+          <Input onChange={(e) => callApi(e)}
 
-            <Button variant="outline" type='submit' className='mt-8 bg-white text-black text-center'>Search for Deals</Button></div>
-              
-             
-          </form> }
-          <Image style={{width:"50%", border:"1px solid white", marginTop:"3%", borderRadius:"10px"}} alt="/preview.png" src={prev}>
-          </Image> 
+             id="imgupload" type="file" className="hidden"></Input> 
+             </form>
+        </div>
+        
+          <div onClick={() => document.getElementById("how")?.scrollIntoView({behavior: "smooth" })}  className='font-MD cursor-pointer hover:text-[#fa9886]'>How it works</div>
        </CardContent>
 
     </Card>
-    <div className='mt-32 border-t-2 flex flex-col items-center'><h1 className='mt-24 text-l text-gray-600'>Affiliate Disclosure:</h1><p className='text-sm text-gray-600  w-5/6 text-wrap text-center'>
-
-This website is dedicated to finding the cheapest prices for products across various websites. Some of the links provided are affiliate links, meaning I may earn a small commission if you click on them and make a purchase, at no extra cost to you. These commissions help support the operation of the site, allowing us to continue offering this service. Rest assured, the recommendations are based solely on price and product availability, not on affiliate relationships.
-
-Thank you for your support!</p></div>
+    <div className=''>
+    <div className='bg-[#fa9886] absolute w-[110vw] h-[100vh] inset-y-7/9 -translate-x-1/2 left-1/2 rounded-t-full mt-5 shadow-[0px_-4px_202px_20px_#fa9886]'>
+    <div className='flex flex-col items-center overflow-x-hidden'>
+          <div className='text-white font-SB text-5xl max-md:text-3xl max-sm:text-lg mt-[3.5vw]'>Trending Searches</div>
+          <div className="w-[50vw] md:w-[45vw] flex flex-row mt-[3vw] justify-center"> 
+          <Carousel plugins={[ Autoplay({
+          delay: 2500,
+          
+        }),]} opts={{
+          loop: true
+       
+        
+      }}>
+            <CarouselContent>
+              
+          
+          {trending.length > 0 ? (
+            trending.map((item, index) => (
+              <CarouselItem
+                key={index}
+                className="basis-1/3"
+              >
+                {item}
+              </CarouselItem>
+              
+            ))
+          ) : (
+            <div className="h-[15vw] w-[20vw] flex items-center justify-center"><LoadingSpinner className="h-[10vw] w-[10vw]"></LoadingSpinner></div>
+          )}
+           
+            </CarouselContent>
+              <CarouselPrevious className="border-black" />
+              <CarouselNext className="border-black" />
+          </Carousel>
+          </div>
+    </div>
+    <div className='w-full h-[0.1vw] bg-white mt-[5vw] shadow-[0px_0px_3px_5px_#ffffff]'></div>
+    <div className='relative text-3xl w-full h-[2vw] text-white font-SB mt-2 text-center'>How it works</div>
+    <div id="how" className='flex flex-col md:space-x-3 w-full md:mt-[3vw] mt-[10vw] items-center md:justify-center md:flex-row bg-[#fa9886]'>
+          <Step  img={<Clipboard className='h-[16vw]'></Clipboard>} header="1. Paste a product link" content="Found something you want to buy? Copy the link of the product and paste it into our search bar."></Step>
+          <Step img={<Searching className='h-[16vw]'></Searching>} header="2. Let us do the searching" content="We'll instantly scan the web to find cheaper prices or similar alternatives for the product you love."></Step>
+          <Step img={<Results className= 'w-[18vw] h-[16vw]' ></Results>} header="3. Compare your options" content="Review the results and choose the deal that works best for you. Saving money has never been this easy!"></Step>
+          <Step  img={<Bag className='h-[16vw]'></Bag>} header="4. Shop smart" content="Click on your preferred deal and complete your purchase. More savings mean more shopping power for you!"></Step>
+    </div>
+    </div>
+    </div> 
    </div>
+   
   );
 }

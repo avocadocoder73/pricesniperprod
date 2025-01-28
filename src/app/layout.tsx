@@ -28,7 +28,7 @@ const SatoshiBold = localFont({
 
 
 export const metadata: Metadata = {
-  title: "PandaLookup",
+  title: "PeachyPrices",
   description: "Find the best prices on TikTok Shop products across the web. PandaLookup helps you compare prices and save money.",
 };
 
@@ -54,7 +54,7 @@ export default function RootLayout({
           }
         </Script>
       </head>
-        <body>
+        <body className="h-full overflow-x-hidden">
         {children}
         </body>
     </html>
