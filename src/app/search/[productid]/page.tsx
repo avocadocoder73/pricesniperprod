@@ -132,7 +132,7 @@ export default function SearchStuff()
     
     
     var data;
-    console.log("HERE4")
+    
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getproducts", {method:"POST", headers: { "Content-Type": "text/plain"}, body:payload}).then(async(res) => 
     {
       
@@ -252,7 +252,7 @@ export default function SearchStuff()
           >
             <Search size={30} className="stroke-white ml-2" />
           </button>
-          <Input className='bg-[#fcd5ce] mt-3 w-auto h-11 md:w-2/3 rounded-none placeholder:text-white placeholder:font-MD border-t-2 border-b-2 border-l-0 border-r-0 border-[#fec5bb]' placeholder='Find cheaper prices'></Input>
+          <Input className='bg-[#fcd5ce] mt-3 w-auto h-11 md:w-2/3 rounded-none placeholder:font-MD font-MD text-black placeholder:text-white border-t-2 border-b-2 border-l-0 border-r-0 border-[#fec5bb]' placeholder='Find cheaper prices'></Input>
           
           {o ? (<div className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] h-11 flex items-center"><LoadingSpinner></LoadingSpinner></div> ) :  (<label htmlFor="imgupload">
                       <Image  size={40} className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] h-11"></Image>

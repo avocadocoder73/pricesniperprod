@@ -107,9 +107,9 @@ export const columns : ColumnDef<Entry>[] = [
             //<Link className="font-['SatoshiMed']" style={{height:"100px", width:"100px"}} href={url}>{url}</Link>
 
             return (
-            <div className="flex flex-row justify-between h-full items-end"><p className="font-['SatoshiMed'] ml-[0.2vw] md:text-5xl underline italic font-bold text-xs leading-none">{dat}</p>
+            <div className="flex flex-row justify-between h-full items-end"><p className="font-['SatoshiMed'] ml-[0.2vw] md:text-5xl underline italic font-bold text-xs leading-none decoration-skip-ink-none">{dat}</p>
             <Button  className="bg-[#f48889] font-SB border-white border-2 md:h-[3.1rem] text-[2vw] md:text-3xl " asChild>
-                <Link href={url}>View</Link>
+                <Link target="_blank" rel="noopener noreferrer" href={url}>View</Link>
             </Button>
             
             </div>
