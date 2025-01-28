@@ -29,7 +29,7 @@ const SatoshiBold = localFont({
 
 export const metadata: Metadata = {
   title: "PeachyPrices",
-  description: "Find the best prices on TikTok Shop products across the web. PandaLookup helps you compare prices and save money.",
+  description: "Find the best prices on TikTok Shop products across the web. PeachyPrices helps you compare prices and save money.",
 };
 
 export default function RootLayout({
