@@ -100,7 +100,7 @@ export default function Home() {
     let payload = (await setImg(event)) as string
     try {
 
-    /*
+    
     
     if(tiktokURLdat.toLowerCase().includes("https://www.tiktok.com/"))
     {
@@ -126,7 +126,7 @@ export default function Home() {
     {
       
        data = await res.text()
-//      const params = new URLSearchParams(JSON.stringify(data)).toString();
+      const params = new URLSearchParams(JSON.stringify(data)).toString();
       console.log(data)
       
       
@@ -143,7 +143,7 @@ export default function Home() {
 
     
     return
-    */
+    
     }
     catch(err) {
       setO(false)
@@ -185,7 +185,7 @@ export default function Home() {
     console.log("TEST")
     try {
 
-    /*
+    
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/tiktoklink", {method:"POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async(res) => 
     {
       
@@ -229,18 +229,18 @@ export default function Home() {
     }
     
     ).catch((err) => {console.log(err); 
-     })*/
+     })
     }
     catch(err)
     {
 
     }
     finally{
-      console.log(ld)
+      
       setLD(false)
     }
-      //console.log(data)
-    //router.push(`/search/${data}`)
+      console.log(data)
+    router.push(`/search/${data}`)
   }
 
 //className="-ml-4 max-w-5xl flex flex-row mt-[3vw] justify-center"
@@ -255,9 +255,11 @@ export default function Home() {
             <div className='text-[#fec89a] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Prices</div>
         </CardHeader>
          <CardDescription className='text-[22px] text-[#a5c8b3] font-SB italic'>Your shortcut to savings</CardDescription>
+         {!ld ? 
        <CardContent className='flex flex-col items-center w-full'>
+        
         <div className='w-full flex flex-row items-center justify-center'>
-        {!ld ? <form className="w-full flex flex-row items-center justify-center" onSubmit={(e) => {
+        <form className="w-full flex flex-row items-center justify-center" onSubmit={(e) => {
             e.preventDefault()
             tiktokURL(url)
   }}>
@@ -277,15 +279,16 @@ export default function Home() {
           <Input onChange={(e) => callApi(e)}
 
              id="imgupload" type="file" className="hidden " ></Input> 
-             </form> :<LoadingSpinner size={100}></LoadingSpinner>}
+             </form>
         </div>
         
           <div onClick={() => document.getElementById("how")?.scrollIntoView({behavior: "smooth" })}  className='font-MD text-[13px] cursor-pointer  hover:text-[#fa9886]'>How it works</div>
-       </CardContent>
+
+       </CardContent> : <LoadingSpinner size={100}></LoadingSpinner>}
 
     </Card>
     <div className=''>
-    <div className='bg-[#fa9886] absolute w-[110vw] h-[100vh] inset-y-7/9 -translate-x-1/2 left-1/2 rounded-t-full mt-5 shadow-[0px_-4px_202px_20px_#fa9886]'>
+    <div className='bg-[#fa9886] border-[3px] border-[#FE8671] absolute w-[110vw] h-[100vh] inset-y-7/9 -translate-x-1/2 left-1/2 rounded-t-full mt-5 shadow-[0px_-4px_202px_20px_#fa9886]'>
     <div className='flex flex-col items-center overflow-x-hidden'>
           <div className='text-white font-SB text-5xl max-md:text-3xl mb-[3vw] max-sm:text-lg mt-[3.5vw]'>Trending Searches</div>
           <div className="w-[50vw] md:w-[45vw] flex flex-row mt-[-1vw] justify-center"> 
@@ -315,21 +318,34 @@ export default function Home() {
           )}
            
             </CarouselContent>
-              <CarouselPrevious className="border-white" />
-              <CarouselNext className="border-white" />
+              <CarouselPrevious className="border-white border-2" />
+              <CarouselNext className="border-white border-2" />
           </Carousel>
           </div>
+          
     </div>
-    <div className='w-full h-[0.1vw] bg-white shadow-[0px_0px_3px_1px_#ffffff]'></div>
-    {ld ? <div className='relative text-3xl w-full h-[2vw] text-white font-SB mt-[2vw] text-center'>How it works</div> : ''}
+    <div className="relative w-full flex justify-center overflow-hidden">
+  <div className="w-[94.7vw] h-[0.1vw] bg-white shadow-[0px_0px_3px_1px_#ffffff]"
+    >
+</div>
+    </div>   
+    <div className='relative text-3xl w-full h-[2vw] text-white font-SB mt-[2vw] text-center'>How it works</div>
     <div id="how" className='flex flex-col md:space-x-3 w-full md:mt-[1vw] mt-[10vw] items-center md:justify-center md:flex-row bg-[#fa9886]'>
           <Step  img={<Clipboard className='h-[16vw]'></Clipboard>} header="1. Paste a product link" content="Found something you want to buy? Copy the link of the product and paste it into our search bar."></Step>
           <Step img={<Searching className='h-[16vw]'></Searching>} header="2. Let us do the searching" content="We'll instantly scan the web to find cheaper prices or similar alternatives for the product you love."></Step>
           <Step img={<Results className= 'w-[18vw] h-[16vw]' ></Results>} header="3. Compare your options" content="Review the results and choose the deal that works best for you. Saving money has never been this easy!"></Step>
           <Step  img={<Bag className='h-[16vw]'></Bag>} header="4. Shop smart" content="Click on your preferred deal and complete your purchase. More savings mean more shopping power for you!"></Step>
     </div>
+    <div className="h-[10vw] bg-[#fa9886] text-black">
+          <div className="flex flex-row h-full">
+      <div className='text-[#fec5bb] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Peachy</div>
+            <Peach className="w-[100px] h-[40px] md:h-[50px]" style={{marginRight:"-12px"}}></Peach>
+            <div className='text-[#fec89a] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Prices</div>
+            </div>
+    </div>
     </div>
     </div> 
+    
    </div>
    
   );
