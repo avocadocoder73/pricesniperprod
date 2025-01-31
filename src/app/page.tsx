@@ -197,7 +197,7 @@ export default function Home() {
      
       
       
-      
+      /*
       data = data.filter((item) => (item as any).price != null ) as []
 
       data = data.filter((item) => (item as any).img != "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==") as []
@@ -217,7 +217,7 @@ export default function Home() {
       let base64Encoded = Buffer.from(compressed).toString('base64')
       
       base64Encoded = base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
+      */
       
 
       
