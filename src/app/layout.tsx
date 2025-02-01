@@ -41,15 +41,15 @@ export default function RootLayout({
     
     <html lang="en" className="h-full">
       <head>
-        <Script src={`https://www.googletagmanager.com/gtag/js?id=G-ZBEQWVMJ3J`} strategy="afterInteractive"/>
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=G-YDY00DSFXS`} strategy="afterInteractive"/>
         <Script id="google-analytics" strategy="afterInteractive">
           {
             `
-             window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-              gtag('config', 'G-ZBEQWVMJ3J');
+            gtag('config', 'G-YDY00DSFXS');
             `
           }
         </Script>

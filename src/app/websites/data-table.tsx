@@ -16,6 +16,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { LoadingSpinner } from "@/components/ui/spinner"
 
 
 interface DataTableProps<TData, TValue> {
@@ -141,8 +142,9 @@ export function DataTable<TData, TValue>({
         ))
       ) : (
         <TableRow>
-          <TableCell colSpan={columns.length} className="h-full text-center">
-            No results.
+          <TableCell colSpan={columns.length} className="h-screen min-h-screen flex-col text-xl font-SB items-center flex justify-center text-center">
+            <LoadingSpinner size={100}></LoadingSpinner>
+            Loading Results
           </TableCell>
         </TableRow>
       )}

@@ -16,6 +16,9 @@ import { useEffect, useState } from 'react';
 import { Form, FormControl } from '@/components/ui/form';
 import Searching from './images/search'
 import Clipboard from './images/clip'
+import Instagram from "./images/instagram";
+import Twitter from "./images/x";
+import Tiktok from "./images/tiktok";
 import {
   Carousel,
   CarouselContent,
@@ -330,18 +333,37 @@ export default function Home() {
 </div>
     </div>   
     <div className='relative text-3xl w-full h-[2vw] text-white font-SB mt-[2vw] text-center'>How it works</div>
-    <div id="how" className='flex flex-col md:space-x-3 w-full md:mt-[1vw] mt-[10vw] items-center md:justify-center md:flex-row bg-[#fa9886]'>
+    <div id="how" className='flex flex-col md:space-x-3 w-full md:pb-[5vw] md:mt-[1vw] mt-[10vw] items-center md:justify-center md:flex-row bg-[#fa9886]'>
           <Step  img={<Clipboard className='h-[16vw]'></Clipboard>} header="1. Paste a product link" content="Found something you want to buy? Copy the link of the product and paste it into our search bar."></Step>
           <Step img={<Searching className='h-[16vw]'></Searching>} header="2. Let us do the searching" content="We'll instantly scan the web to find cheaper prices or similar alternatives for the product you love."></Step>
           <Step img={<Results className= 'w-[18vw] h-[16vw]' ></Results>} header="3. Compare your options" content="Review the results and choose the deal that works best for you. Saving money has never been this easy!"></Step>
           <Step  img={<Bag className='h-[16vw]'></Bag>} header="4. Shop smart" content="Click on your preferred deal and complete your purchase. More savings mean more shopping power for you!"></Step>
     </div>
-    <div className="h-[10vw] bg-[#fa9886] text-black">
-          <div className="flex flex-row h-full">
-      <div className='text-[#fec5bb] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Peachy</div>
-            <Peach className="w-[100px] h-[40px] md:h-[50px]" style={{marginRight:"-12px"}}></Peach>
-            <div className='text-[#fec89a] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Prices</div>
+    <div className="h-[40vw] md:h-[10vw] pt-[3vw] pb-[2vw] items-center flex flex-col border-t-4 border-t-[#fec5bb] bg-[#fae1dd] text-black">
+      <div className="flex flex-row items-center  justify-around w-full">
+          <div className="flex flex-col md:flex-row justify-center items-center h-full w-1/3">
+              <div className='text-[#fec5bb] text-2xl lg:text-4xl flex-wrap text-center font-SB italic'>Peachy</div>
+            
+            <div className='text-[#fec89a] text-2xl lg:text-4xl flex-wrap text-center font-SB italic'>Prices</div>
             </div>
+            <div className="flex flex-col items-center h-[5vw]">
+            <div className="flex flex-col w-1/3 md:flex-row md:gap-x-5 items-center md:justify-around">
+              <div className="font-SB">About</div>
+              <div className="font-SB">Blog</div>
+              <div className="font-SB">Contact</div>
+              <div className="font-SB">Privacy</div>
+              <div className="font-SB">Terms</div>
+            </div>
+              <div className="font-MD mt-[1vw] bg-[#fae1dd]">©2025 PeachyPrices</div>
+            </div>
+            <div className="flex flex-row md:gap-x-3 justify-center w-1/3">
+            <Tiktok width={25} height={25}></Tiktok>
+            <Twitter width={25} height={25}></Twitter>
+            <Instagram width={25} height={25}></Instagram>
+            </div>
+            
+        </div>
+      
     </div>
     </div>
     </div> 
