@@ -78,11 +78,11 @@ export default function Home() {
         })
       fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/trending").then(async(res) => {
           let resp = await res.json()
-          console.log(resp)
+          
           for (let i = 0; i < resp.length; i++)
           {
             let dat = resp[i].data.find((item : any) => item.img)
-            console.log(dat)
+          
             
             setTrending((trending : any) => [...trending, <a href={`/search/${resp[i].id}`} target="_blank" rel="noopener noreferrer"><img style={{borderRadius:"10%"}} className="h-4/5 w-4/5 border-[0.2vw] border-[#fcd5ce]" src={dat.img} alt="Trending Item" /></a>]); 
             
@@ -97,7 +97,7 @@ export default function Home() {
 
   const callApi = async (event : any) => {
     
-    console.log("HERE")
+    
     setO(true)
     
     let payload = (await setImg(event)) as string
@@ -124,13 +124,13 @@ export default function Home() {
     
     
     var data;
-    console.log("HERE4")
+    
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getproducts", {method:"POST", headers: { "Content-Type": "text/plain"}, body:payload}).then(async(res) => 
     {
       
        data = await res.text()
       const params = new URLSearchParams(JSON.stringify(data)).toString();
-      console.log(data)
+      
       
       
      
@@ -141,7 +141,7 @@ export default function Home() {
     ).catch((err) => {console.log(err);
       
      })
-    console.log(data)
+    
     router.push(`/search/${data}`)
 
     
@@ -185,16 +185,25 @@ export default function Home() {
     
     var data
     setLD(true)
-    console.log("TEST")
+    
     try {
-
+    
+    if(!event.includes("http"))
+    {
+      await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/shopping", {method: "POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async (res) => {
+        data = await res.text()
+        
+      })
+      router.push(`/search/${data}`)
+      return
+    }
     
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/tiktoklink", {method:"POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async(res) => 
     {
       
       data = await res.text()
 
-      console.log(data)
+      
       
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
      
@@ -224,7 +233,6 @@ export default function Home() {
       
 
       
-
       
       
      
@@ -242,7 +250,7 @@ export default function Home() {
       
       setLD(false)
     }
-      console.log(data)
+      
     router.push(`/search/${data}`)
   }
 
@@ -274,7 +282,7 @@ export default function Home() {
             <Search size={30} className="stroke-white ml-2" />
           </button>
        
-          <Input onChange={(e) => setURL(e.target.value)} className='bg-[#fcd5ce] mt-3 w-1/2 lg:w-2/6 h-11 rounded-none placeholder:text-white placeholder:text-[17px] placeholder:font-MD border-t-2 border-b-2 border-l-0 border-r-0 border-[#fec5bb]' placeholder='Find cheaper prices'></Input>
+          <Input onChange={(e) => setURL(e.target.value)} className='bg-[#fcd5ce] mt-3 w-1/2 lg:w-2/6 h-11 rounded-none placeholder:text-white text-black font-SB text-[15px] placeholder:text-[17px] placeholder:font-MD border-t-2 border-b-2 border-l-0 border-r-0 border-[#fec5bb]' placeholder='Find cheaper prices'></Input>
          
           {o ? (<div className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] h-11 flex items-center"><LoadingSpinner></LoadingSpinner></div> ) :  (<label htmlFor="imgupload">
             <Image  size={40} className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] cursor-pointer h-11"></Image>
