@@ -27,7 +27,7 @@ export default function SearchStuff()
     const [data, setData] = useState([])
 
     const [affil, setAffil] = useState<Record<string, any>>({})
-    
+    const [ld, setLD] = useState(false)
     const [o, setO] = useState(false)
     const [error, setError] = useState(false)
     const [errormsg, setErrorMsg] = useState('')
@@ -190,24 +190,27 @@ export default function SearchStuff()
   const tiktokURL = async(event : any) => {
     
     var data
-
+    
+    try {
+    
     if(!event.includes("http"))
     {
+      setLD((ld) => !ld)
       await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/shopping", {method: "POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async (res) => {
         data = await res.text()
         
       })
+      setLD((ld) => !ld)
       router.push(`/search/${data}`)
       return
     }
-
-
+    
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/tiktoklink", {method:"POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async(res) => 
     {
       
       data = await res.text()
 
-      console.log(data)
+      
       
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
      
@@ -233,21 +236,28 @@ export default function SearchStuff()
       let base64Encoded = Buffer.from(compressed).toString('base64')
       
       base64Encoded = base64Encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-
       */
-
       
 
       
       
-     setO(false)
+      
+     
       
     }
     
-    ).catch((err) => {console.log(err); setError(true);
-      setErrorMsg("Failed to fetch products. Check console for more")})
-  
-      console.log(data)
+    ).catch((err) => {console.log(err); 
+     })
+    }
+    catch(err)
+    {
+
+    }
+    finally{
+      
+     
+    }
+      
     router.push(`/search/${data}`)
   }
 
@@ -258,13 +268,13 @@ export default function SearchStuff()
             e.preventDefault()
             tiktokURL(url)
   }}>
-         <button 
+         {!ld ? <button 
             className="h-11 inline-flex items-center justify-center bg-[#fcd5ce] border-2 border-r-0 border-[#fec5bb] rounded-l-3xl mt-3" 
             // Match SVG size exactly
           >
             <Search size={30} className="stroke-white ml-2" />
-          </button>
-          <Input className='bg-[#fcd5ce] mt-3 w-auto h-11 md:w-2/3 rounded-none placeholder:font-MD font-MD text-black placeholder:text-white border-t-2 border-b-2 border-l-0 border-r-0 border-[#fec5bb]' placeholder='Find cheaper prices'></Input>
+          </button> : <div className='h-11 inline-flex items-center justify-center bg-[#fcd5ce] border-2 border-r-0 border-[#fec5bb] rounded-l-3xl mt-3'><LoadingSpinner className='stroke-black' ></LoadingSpinner></div>}
+          <Input onChange={(e) => setURL(e.target.value)} className='bg-[#fcd5ce] mt-3 w-auto h-11 md:w-2/3 rounded-none placeholder:font-MD font-MD text-black placeholder:text-white border-t-2 border-b-2 border-l-0 border-r-0 border-[#fec5bb]' placeholder='Find cheaper prices'></Input>
           
           {o ? (<div className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] h-11 flex items-center"><LoadingSpinner></LoadingSpinner></div> ) :  (<label htmlFor="imgupload">
                       <Image  size={40} className="stroke-white mt-3 pr-3 bg-[#fcd5ce] border-l-0 rounded-r-3xl border-2 border-[#fec5bb] h-11"></Image>
