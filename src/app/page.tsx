@@ -354,15 +354,15 @@ export default function Home() {
             
             <div className='text-[#fec89a] text-2xl lg:text-4xl flex-wrap text-center font-SB italic'>Prices</div>
             </div>
-            <div className="flex flex-col items-center h-[5vw]">
-            <div className="flex flex-col w-1/3 md:flex-row md:gap-x-5 items-center md:justify-around">
+            <div className="flex flex-col w-1/3 items-center">
+            <div className="flex flex-col md:flex-row md:gap-x-5 items-center md:justify-around">
               <div className="font-SB">About</div>
               <div className="font-SB">Blog</div>
               <div className="font-SB">Contact</div>
               <div className="font-SB">Privacy</div>
               <div className="font-SB">Terms</div>
             </div>
-              <div className="font-MD mt-[1vw] bg-[#fae1dd]">©2025 PeachyPrices</div>
+              
             </div>
             <div className="flex flex-row md:gap-x-3 justify-center w-1/3">
             <Tiktok width={25} height={25}></Tiktok>
@@ -371,7 +371,7 @@ export default function Home() {
             </div>
             
         </div>
-      
+      <div className="w-full bg-[#fae1dd] font-SB flex flex-row justify-center">©2025 PeachyPrices</div>
     </div>
     </div>
     </div> 
