@@ -270,7 +270,7 @@ export default function Home() {
        <CardContent className='flex flex-col items-center w-full'>
         
         <div className='w-full flex flex-row items-center justify-center'>
-        <form className="w-full flex flex-row items-center justify-center" onSubmit={(e) => {
+        <form className="w-full flex flex-row items-center justify-center z-99" onSubmit={(e) => {
             e.preventDefault()
             tiktokURL(url)
   }}>
