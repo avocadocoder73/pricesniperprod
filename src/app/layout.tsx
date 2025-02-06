@@ -30,6 +30,9 @@ const SatoshiBold = localFont({
 export const metadata: Metadata = {
   title: "PeachyPrices",
   description: "Find the best prices on TikTok Shop products across the web. PeachyPrices helps you compare prices and save money.",
+  other: {
+    "impact-site-verification": "dcc698ba-e4a6-4796-8277-586c4f7a8221",
+  },
 };
 
 export default function RootLayout({
@@ -53,6 +56,7 @@ export default function RootLayout({
             `
           }
         </Script>
+        
       </head>
         <body className="h-full overflow-x-hidden">
         {children}
