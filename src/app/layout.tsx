@@ -53,6 +53,15 @@ export default function RootLayout({
             gtag('js', new Date());
 
             gtag('config', 'G-YDY00DSFXS');
+
+            
+            `
+          }
+        </Script>
+        <Script>
+          {
+            `
+            (function(i,m,p,a,c,t){c.ire_o=p;c[p]=c[p]||function(){(c[p].a=c[p].a||[]).push(arguments)};t=a.createElement(m);var z=a.getElementsByTagName(m)[0];t.async=1;t.src=i;z.parentNode.insertBefore(t,z)})('https://utt.impactcdn.com/P-A6050112-fc86-4a39-8c5c-0f01c0d180b71.js','script','impactStat',document,window);impactStat('transformLinks');impactStat('trackImpression');
             `
           }
         </Script>
