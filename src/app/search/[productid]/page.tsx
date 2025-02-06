@@ -95,7 +95,10 @@ export default function SearchStuff()
                 return updatedItem;
                 });
             
-            
+            data = data.map((item : any) => ({
+              ...item,
+              price: item.price.match(/\$\d+\.\d+/)[0] // Extracts only the first price
+            }));
 
             setData(data)
             console.log(data)
