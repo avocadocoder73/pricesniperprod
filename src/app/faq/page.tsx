@@ -23,17 +23,17 @@ let list = [{title: "What is Peachy Prices", content: "PeachyPrices is a tool th
 
 export default function FAQ()
 {
-    return (<div className="h-full bg-[#ffe4e1]"><div  className='flex h-max items-center p-4'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-8'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><div className='w-full flex flex-row items-center justify-center'>
+    return (<div className="h-full bg-[#ffe4e1]"><div  className='flex h-max items-center p-4 border-b-[#fec5bb] border-b-4'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-8'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><div className='w-full flex flex-row items-center justify-center'>
         
         </div></div></div>
-        <div style={{background: "linear-gradient(to top, #fa9886 5%, #ffe4e1)", backgroundPosition: "bottom", // Ensures gradient starts at the bottom
+        <div style={{background: "#fff8f8", backgroundPosition: "bottom", // Ensures gradient starts at the bottom
     backgroundSize: "100% 100%",}} className="w-full flex justify-center min-h-screen">
         <Accordion type="single" collapsible>
-            {list.map((item, index) => (<AccordionItem  className="w-[50vw] border-[0.25vw] border-[#f48889] m-[3vw] p-[3vw] rounded-3xl flex flex-col justify-center text-center items-center" value={index.toString()}>
-                <AccordionTrigger className="font-SB text-center text-lg md:text-4xl pl-[3vw] pr-[3vw] ">
+            {list.map((item, index) => (<AccordionItem  className="w-[50vw] border-[0.25vw] border-black m-[3vw] p-[3vw] rounded-3xl flex flex-col justify-center text-center items-center" value={index.toString()}>
+                <AccordionTrigger className="font-SB text-center text-lg text-black md:text-4xl pl-[3vw] pr-[3vw] ">
                     {item.title}
                 </AccordionTrigger>
-                <AccordionContent className="font-MD text-xs md:text-2xl ">
+                <AccordionContent className="font-MD text-xs text-black md:text-2xl ">
                     {item.content}
                 </AccordionContent>
             </AccordionItem>))

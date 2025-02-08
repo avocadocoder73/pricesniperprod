@@ -259,7 +259,7 @@ export default function Home() {
 
   return (
     <div className='h-full w-full '>
-   <div className='flex h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link></div></div>
+   <div className='flex h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link></div></div>
     <Card className='flex flex-col justify-center items-center bg-clear border-none shadow-none'>
         <CardHeader className='flex flex-row items-center'>
            <div className='text-[#fec5bb] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Peachy</div>
@@ -366,9 +366,9 @@ export default function Home() {
               
             </div>
             <div className="flex flex-row md:gap-x-3 justify-center w-1/3">
-            <Tiktok width={25} height={25}></Tiktok>
-            <Twitter width={25} height={25}></Twitter>
-            <Instagram width={25} height={25}></Instagram>
+            <Link target="_blank" href="https://www.tiktok.com/@peachypricesofficial"><Tiktok  width={25} height={25}></Tiktok></Link>
+            <Link target="_blank"   href="https://x.com/PeachyPrices"><Twitter width={25} height={25}></Twitter></Link>
+            <Link target="_blank"  href="https://www.instagram.com/peachypricesofficial/"><Instagram width={25} height={25}></Instagram></Link>
             </div>
             
         </div>
