@@ -5,12 +5,41 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useEffect } from "react"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { BlogItems } from "../page"
 import { LoadingSpinner } from "@/components/ui/spinner"
 import { Separator } from "@/components/ui/separator"
 import { Blog } from "../page"
 import { Button } from "@/components/ui/button"
 import Back from '../../images/back'
+
+
+
+function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid: any, time: any, author: any })
+{
+    
+
+
+    return (
+        <Link href={`/blog/${blogid}`}>
+        <Card className="w-full">
+            <CardHeader className="flex-row flex">
+                    <img src={`https://d33mn5vlirq551.cloudfront.net/blog${blogid}.jpg`} className="w-1/2 h-[10vw] border-black border-[2px] rounded-md"></img>
+                    <div className="w-1/3 ml-[1vw] flex flex-col">
+                    <div className="w-full flex flex-row justify-between items-center">
+                        <CardDescription className="text-black text-lg">{time.split('.')[0]}</CardDescription>
+                        <Separator className="w-2 bg-black"></Separator>
+                        <CardDescription className="text-black text-lg">{new Date(parseInt(date)).toLocaleString('en-US', {year: 'numeric',month: 'short',day: 'numeric',})}</CardDescription>
+                    </div>
+                        <CardTitle>{title}</CardTitle>
+                    </div>
+            </CardHeader>
+            
+        </Card>
+        </Link>
+    )
+
+}
+
+
 export default function BlogPage() {
 
     const [blogitems, setBlogItems] = useState<Blog[]>([]) 
