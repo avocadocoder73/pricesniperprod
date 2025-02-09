@@ -17,7 +17,7 @@ export type Blog = {
 }
 
 
-export function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid: any, time: any, author: any })
+function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid: any, time: any})
 {
     
 
@@ -109,8 +109,7 @@ useEffect(() => {
                             <BlogItems 
                                 key={index} 
                                 time={item.time} 
-                                title={item.title} 
-                                author={item.author} 
+                                title={item.title}                                
                                 blogid={item.blogid} 
                                 date={item.date} 
                             />

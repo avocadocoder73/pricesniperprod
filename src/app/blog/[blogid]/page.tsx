@@ -9,7 +9,7 @@ import { LoadingSpinner } from "@/components/ui/spinner"
 import { Separator } from "@/components/ui/separator"
 import { Blog } from "../page"
 import { Button } from "@/components/ui/button"
-import Back from '../../images/back'
+
 
 
 
