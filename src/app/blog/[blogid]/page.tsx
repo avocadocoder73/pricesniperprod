@@ -10,7 +10,7 @@ import { LoadingSpinner } from "@/components/ui/spinner"
 import { Separator } from "@/components/ui/separator"
 import { Blog } from "../page"
 import { Button } from "@/components/ui/button"
-import Back from "@/app/images/back"
+import Back from '../../images/back'
 export default function BlogPage() {
 
     const [blogitems, setBlogItems] = useState<Blog[]>([]) 
@@ -38,6 +38,21 @@ export default function BlogPage() {
     }, [])
     
 
+    const processText = (text : String) => {
+    return text.split("\n\n").map((paragraph, index) => {
+        const lines = paragraph.split("\n"); // Split by line
+        const firstLine = lines.shift(); // Extract the first line
+        return (
+            <p key={index} className="mb-4">
+                <span className="text-3xl font-SB">{firstLine}</span> {/* First line styling */}
+                {lines.length > 0 && <br />} {/* Preserve spacing */}
+                {lines.join("\n")} {/* Join remaining lines */}
+            </p>
+        );
+    });
+};
+
+
 
     useEffect(() => {
 
@@ -60,12 +75,10 @@ export default function BlogPage() {
     }, [])
 
 
-    return main ? <div className='h-full w-full bg-[#fff8f8] '><div className='flex h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link></div></div>
+    return (<div className='h-full w-full bg-[#fff8f8] '><div className='flex h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link></div></div>
 
-<div className="w-full h-full flex flex-row">
-    <div><Button>
-        back
-        </Button></div>
+{main ? <div className="w-full h-full flex flex-row">
+    <div></div>
         <div className="h-full w-3/5 ml-[10vw]">
             <Card className="border-0 bg-[#fff8f8]">
                     <CardHeader className="w-full">
@@ -82,9 +95,9 @@ export default function BlogPage() {
                     
                     </CardHeader>
                     <CardContent className="font-MD text-xl">
-                        <p>
-                            {main.text}
-                        </p>
+                        <pre className="font-MD text-wrap">
+                            {processText(main.text)}
+                        </pre>
                     </CardContent>
             </Card>
         </div>
@@ -117,8 +130,8 @@ export default function BlogPage() {
         </div>
 
 
-    </div>
+    </div> : <LoadingSpinner></LoadingSpinner>}
 
     
-    </div> : <LoadingSpinner></LoadingSpinner>
+    </div> )
 }
