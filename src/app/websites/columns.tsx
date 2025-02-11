@@ -97,13 +97,27 @@ export const columns : ColumnDef<Entry>[] = [
             
             const start = dat?.indexOf('$')
             const end = dat?.indexOf('*')
+            
             if(start && end && dat)
             {            
                 dat = dat.substr(start, end - start)
             }
 
-           
+            let indices = [];
+            let index = dat.indexOf('$');
 
+            while (index !== -1) {
+                indices.push(index);
+                index = dat.indexOf('$', index + 1); // Find next '$'
+            }
+
+            if(indices.length > 1)
+            {
+                const match = dat.match(/\$\d+(\.\d{2})?/);
+                dat = match ? match[0] : ''
+            }
+
+            dat = dat.replace('*', '')
             //<Link className="font-['SatoshiMed']" style={{height:"100px", width:"100px"}} href={url}>{url}</Link>
 
             return (

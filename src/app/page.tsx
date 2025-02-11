@@ -85,7 +85,7 @@ export default function Home() {
             let dat = resp[i].data.find((item : any) => item.img)
           
             
-            setTrending((trending : any) => [...trending, <a href={`/search/${resp[i].id}`} target="_blank" rel="noopener noreferrer"><div className="bg-white rounded-xl flex flex-row justify-center items-center h-4/5 w-4/5 border-[0.2vw] border-[#fcd5ce]">
+            setTrending((trending : any) => [...trending, <a href={`/search/${resp[i].id}`} target="_blank" rel="noopener noreferrer"><div  className="bg-white rounded-xl flex flex-row justify-center items-center h-4/5 w-4/5 border-[0.2vw] border-[#fcd5ce]">
   <img
     style={{ borderRadius: "10%", objectFit: "contain", width: "100%", height: "100%" }}
     src={dat.img}
@@ -128,6 +128,8 @@ export default function Home() {
      
       throw new Error("IMAGE NOT SET")
     }
+
+    
     
     
     
@@ -191,10 +193,21 @@ export default function Home() {
 
   const tiktokURL = async(event : any) => {
     
-    var data
+    var data = '' 
     setLD(true)
     
     try {
+
+    if(event.includes("amzn") || event.includes("amazon") || event.includes("a.co"))
+    {
+      await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/amazongrab", {method: "POST", body:event}).then(async(res) => {
+        data = await res.text() as string
+
+      })
+      router.push(`/search/${data ? data.replace(/['"]/g, '') : "error"}`)
+
+      return
+    }
     
     if(!event.includes("http"))
     {
