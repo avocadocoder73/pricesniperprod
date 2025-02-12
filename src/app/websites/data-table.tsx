@@ -84,7 +84,7 @@ export function DataTable<TData, TValue>({
             </div>
             
           </TableRow>
-          <div className="font-SB mb-[3vw] mt-[-3vw]">*PeachyPrices may receive compensation for purchases made at participating retailers linked on this site. This compensation does not affect what products or prices are displayed, or the order of prices listed</div>
+          <div className="font-SB mb-[3vw] mt-[-3vw]">*PeachyPrices may earn a commission on purchases made through links to participating retailers on this site. This doesn’t affect the products or prices shown, or the order in which they appear. The commission helps keep the site running. Thanks for supporting us!</div>
           <TableHeader className="w-full">
            {table.getHeaderGroups().map((group) => (
             <TableRow className="flex flex-row justify-between" key={group.id}>
