@@ -24,14 +24,25 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
 }
 
+const initialState = {
+    sorting: [
+      {
+        id: 'companyname', // column you want to sort by default
+        desc: false, // set to true for descending order
+      },
+    ],
+  };
+
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
+    initialState,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   })

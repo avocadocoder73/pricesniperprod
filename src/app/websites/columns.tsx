@@ -29,7 +29,7 @@ export const columns : ColumnDef<Entry>[] = [
             <img
                 src={imgUrl}
                 alt="Image description"
-                className="w-full h-full object-contain"
+                className="w-auto h-auto flex object-contain"
                 
                 />)
         }
@@ -38,9 +38,12 @@ export const columns : ColumnDef<Entry>[] = [
         accessorKey: "companyname",        
         header: ({column}) => {
 
+            let sorted = column.getIsSorted()
+            let color = sorted ? (!(sorted === 'asc') ? 'bg-[#f48889] text-white' : 'bg-white text-black') : ''
             return (
                    <Button
-                    className="text-white bg-[#f48889] ml-0 md:text-lg  text-xs"
+                   
+                    className={`bg-[#f48889] ml-0 md:text-lg ${color} text-xs`}
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
@@ -52,9 +55,11 @@ export const columns : ColumnDef<Entry>[] = [
         },
         cell: ({row}) => {
             
-            let data = row.original.companyname
+            let data = row.original.companyname as string
             
             let companyimg = row.original.companyimg as string
+
+            data = data.replace(/^(.*)\1$/, '$1');
 
             return(
                 <div className="flex flex-row items-center"><img className="pr-[0.2vw]  md:w-auto" src={companyimg}></img><p className="font-['SatoshiMed'] text-xs md:text-xl" >{data}</p></div>
@@ -62,35 +67,36 @@ export const columns : ColumnDef<Entry>[] = [
         },
         sortingFn: (rowA: any, rowB: any, columnId: any) => {
             // Strip the $ sign and convert to a float for comparison
-            const nameA = rowA.original.companyname;
-            const nameB = rowB.original.companyname;
+           const nameA = rowA.original.companyname;
+    const nameB = rowB.original.companyname;
 
-    
-            const priorityOrder = ['amazon.com', 'temu', 'ebay','aliexpress', 'walmart'];
+    const priorityOrder = ['amazon.com', 'temu', 'ebay', 'aliexpress', 'walmart'];
 
-            const indexA = priorityOrder.indexOf(nameA);
-            const indexB = priorityOrder.indexOf(nameB);
+    const indexA = priorityOrder.indexOf(nameA);
+    const indexB = priorityOrder.indexOf(nameB);
 
-            // If one of the names is in the priority list, prioritize them
-            if (indexA !== -1 && indexB !== -1) {
-                return indexA - indexB; // Sort by the priority order
-            }
-            if (indexA !== -1) {
-                return -1; // rowA comes before rowB because it's in the priority list
-            }
-            if (indexB !== -1) {
-                return 1; // rowB comes before rowA because it's in the priority list
-            }
+    // If both names are in the priority list, sort by their priority
+    if (indexA !== -1 && indexB !== -1) {
+        return indexA - indexB;
+    }
 
-            // If neither name is in the priority list, sort alphabetically
-            if (nameA < nameB) {
-                return -1; // rowA comes before rowB alphabetically
-            }
-            if (nameA > nameB) {
-                return 1; // rowB comes before rowA alphabetically
-            }
+    // If only one name is in the priority list, prioritize that one
+    if (indexA !== -1) {
+        return -1;
+    }
+    if (indexB !== -1) {
+        return 1;
+    }
 
-            return 0; // Names are equal
+    // If neither name is in the priority list, sort alphabetically
+    if (nameA < nameB) {
+        return -1;
+    }
+    if (nameA > nameB) {
+        return 1;
+    }
+
+    return 0;
         }
     },
     {
