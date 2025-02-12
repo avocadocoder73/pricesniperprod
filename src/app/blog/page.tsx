@@ -140,8 +140,8 @@ useEffect(() => {
             <div className="flex flex-col md:flex-row md:gap-x-5 items-center md:justify-around">
               <Link href={'/'}><div className="font-SB">Home</div></Link>
               <Link href={'/faq'}><div className="font-SB">FAQ</div></Link>                          
-              <div className="font-SB">Privacy</div>
-              <div className="font-SB">Terms</div>             
+              <Link href={'/privacy'}><div className="font-SB">Privacy</div></Link>
+              <Link href={'/terms'}><div className="font-SB">Terms</div></Link>          
             </div>
               
             </div>
