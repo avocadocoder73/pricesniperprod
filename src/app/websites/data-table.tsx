@@ -56,7 +56,9 @@ export function DataTable<TData, TValue>({
                 // Render the first cell as is
                 <TableCell className="w-2/4 border-[0.3vw] rounded-l-2xl border-[#fa9886] " key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  
                 </TableCell>
+                
               ) : null // Skip rendering here; render remaining cells later
             ))}          
             <div className="w-2/4 bg-[#fec5bb] flex flex-col border-[0.3vw] border-l-0 rounded-l-none rounded-r-2xl border-[#fa9886] ">
@@ -80,7 +82,9 @@ export function DataTable<TData, TValue>({
                 }
               )}
             </div>
+            
           </TableRow>
+          <div className="font-SB mb-[3vw] mt-[-3vw]">*PeachyPrices may receive compensation for purchases made at participating retailers linked on this site. This compensation does not affect what products or prices are displayed, or the order of prices listed</div>
           <TableHeader className="w-full">
            {table.getHeaderGroups().map((group) => (
             <TableRow className="flex flex-row justify-between" key={group.id}>
