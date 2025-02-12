@@ -19,10 +19,9 @@ export default function Footer ()
             <div className="flex flex-col w-1/3 items-center">
             <div className="flex flex-col md:flex-row md:gap-x-5 items-center md:justify-around">
               <Link href={'/faq'}><div className="font-SB">FAQ</div></Link>
-              <Link href={'/blog'}><div className="font-SB">Blog</div></Link>
-              <div className="font-SB">Contact</div>
-              <div className="font-SB">Privacy</div>
-              <div className="font-SB">Terms</div>
+              <Link href={'/blog'}><div className="font-SB">Blog</div></Link>            
+              <Link href={'/privacy'}><div className="font-SB">Privacy</div></Link>
+              <Link href={'/terms'}><div className="font-SB">Terms</div></Link>
             </div>
               
             </div>
