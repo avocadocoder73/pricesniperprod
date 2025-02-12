@@ -87,7 +87,8 @@ export default function Home() {
             
             setTrending((trending : any) => [...trending, <a href={`/search/${resp[i].id}`} target="_blank" rel="noopener noreferrer"><div  className="bg-white rounded-xl flex flex-row justify-center items-center h-4/5 w-4/5 border-[0.2vw] border-[#fcd5ce]">
   <img
-    style={{ borderRadius: "10%", objectFit: "contain", width: "100%", height: "100%" }}
+    style={{objectFit: "contain", width: "100%", height: "100%" }}
+    className="rounded-xl"
     src={dat.img}
     alt="Trending Item"
   />
@@ -326,7 +327,7 @@ export default function Home() {
           <div className='text-white font-SB text-5xl max-md:text-3xl mb-[3vw] max-sm:text-lg mt-[3.5vw]'>Trending Searches</div>
           <div className="w-[50vw] md:w-[45vw] flex flex-row mt-[-1vw] justify-center"> 
           <Carousel plugins={[ Autoplay({
-          delay: 2500,
+          delay: 25000,
           
         }),]} opts={{
           loop: true
@@ -363,7 +364,7 @@ export default function Home() {
 </div>
     </div>   
     <div className='relative text-3xl w-full h-[2vw] text-white font-SB mt-[2vw] text-center'>How it works</div>
-    <div id="how" className='flex flex-col md:space-x-3 w-full md:pb-[5vw] md:mt-[1vw] mt-[10vw] items-center md:justify-center md:flex-row bg-[#fa9886]'>
+    <div id="how" className='flex flex-col md:space-x-3 w-full pb-5 md:mb-0 md:pb-[5vw] md:mt-[1vw] mt-[10vw] items-center md:justify-center md:flex-row bg-[#fa9886]'>
           <Step  img={<Clipboard className='h-[16vw]'></Clipboard>} header="1. Paste a product link" content="Found something you want to buy? Copy the link of the product and paste it into our search bar."></Step>
           <Step img={<Searching className='h-[16vw]'></Searching>} header="2. Let us do the searching" content="We'll instantly scan the web to find cheaper prices or similar alternatives for the product you love."></Step>
           <Step img={<Results className= 'w-[18vw] h-[16vw]' ></Results>} header="3. Compare your options" content="Review the results and choose the deal that works best for you. Saving money has never been this easy!"></Step>

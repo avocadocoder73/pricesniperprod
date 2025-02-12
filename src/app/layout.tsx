@@ -42,7 +42,7 @@ export default function RootLayout({
 }>) {
   return (
     
-    <html lang="en" className="h-full">
+    <html lang="en" className="min-h-screen">
       <head>
         <Script src={`https://www.googletagmanager.com/gtag/js?id=G-YDY00DSFXS`} strategy="afterInteractive"/>
         <Script id="google-analytics" strategy="afterInteractive">
@@ -67,7 +67,7 @@ export default function RootLayout({
         </Script>
         
       </head>
-        <body className="h-full overflow-x-hidden">
+        <body className="min-h-screen overflow-x-hidden">
         {children}
         </body>
     </html>

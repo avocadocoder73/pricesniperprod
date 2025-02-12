@@ -9,13 +9,18 @@ import { LoadingSpinner } from "@/components/ui/spinner"
 import { Separator } from "@/components/ui/separator"
 import { Blog } from "../page"
 import { Button } from "@/components/ui/button"
-
+import { useMediaQuery } from 'react-responsive'
+import Twitter from "@/app/images/x"
+import Instagram from "@/app/images/instagram"
+import Tiktok from "@/app/images/tiktok"
 
 
 
 function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid: any, time: any, author: any })
 {
     
+
+
 
 
     return (
@@ -40,11 +45,13 @@ function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid:
 }
 
 
+
+
 export default function BlogPage() {
 
     const [blogitems, setBlogItems] = useState<Blog[]>([]) 
     const [main, setMain] = useState<Blog>()
-
+    const mobile = useMediaQuery({ maxWidth: 1024 })
     useEffect(() => {
     
         (async() => {
@@ -177,9 +184,9 @@ const processText = (text: any) => {
     }, [])
 
 //.toLocaleString('en-US', {year: 'numeric',month: 'short',day: 'numeric',})
-    return (<div className='h-full w-full bg-[#fff8f8] '><div className='flex h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link></div></div>
+    return (<div className='min-h-screen w-full bg-[#fff8f8] '><div className='flex h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link></div></div>
 
-{main ? <div className="w-full h-full flex flex-col items-center lg:flex-row">
+{main ? <div className="w-full h-full flex flex-col lg:flex-row">
     
         <div className="h-full w-full md:w-3/5 md:ml-[10vw]">
             <Card className="border-0 bg-[#fff8f8]">
@@ -203,8 +210,8 @@ const processText = (text: any) => {
                     </CardContent>
             </Card>
         </div>
-        <div className="flex flex-col items-center h-full w-2/5 ml-[1vw]">
-            <Card className="w-full flex flex-col justify-center rounded-3xl items-center">
+        {!mobile ? <div className="flex flex-row lg:flex-col items-center h-full w-full lg:w-2/5 ml-[1vw]">
+            <Card className="w-full flex flex-row flex-wrap lg:flex-col justify-center rounded-3xl items-center">
                 <CardHeader>
                     <CardTitle>Latest</CardTitle>
                 </CardHeader>
@@ -229,12 +236,36 @@ const processText = (text: any) => {
 
                 </CardContent>
             </Card>
+        </div> : <div></div>}
+
+
+    </div> : <LoadingSpinner size={50} color="black"></LoadingSpinner>} 
+
+     <div className="h-[40vw] md:h-[10vw] pt-[3vw] pb-[2vw] items-center flex flex-col border-t-4 border-t-[#fec5bb] bg-[#fae1dd] text-black">
+      <div className="flex flex-row items-center  justify-around w-full">
+          <div className="flex flex-col md:flex-row justify-center items-center h-full w-1/3">
+              <div className='text-[#fec5bb] text-2xl lg:text-4xl flex-wrap text-center font-SB italic'>Peachy</div>
+            
+            <div className='text-[#fec89a] text-2xl lg:text-4xl flex-wrap text-center font-SB italic'>Prices</div>
+            </div>
+            <div className="flex flex-col w-1/3 items-center">
+            <div className="flex flex-col md:flex-row md:gap-x-5 items-center md:justify-around">
+              <Link href={'/'}><div className="font-SB">Home</div></Link>
+              <Link href={'/faq'}><div className="font-SB">FAQ</div></Link>                          
+              <div className="font-SB">Privacy</div>
+              <div className="font-SB">Terms</div>             
+            </div>
+              
+            </div>
+            <div className="flex flex-row md:gap-x-3 justify-center w-1/3">
+            <Tiktok width={25} height={25}></Tiktok>
+            <Twitter width={25} height={25}></Twitter>
+            <Instagram width={25} height={25}></Instagram>
+            </div>
+            
         </div>
-
-
-    </div> : <LoadingSpinner size={50} color="black"></LoadingSpinner>}
-
-    
+      <div className="w-full bg-[#fae1dd] font-SB flex flex-row justify-center">©2025 PeachyPrices</div>
+    </div>
     </div> )
 }
     
