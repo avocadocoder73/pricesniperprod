@@ -192,18 +192,28 @@ export default function SearchStuff()
 
   const tiktokURL = async(event : any) => {
     
-    var data
+    var data = ''
     
     try {
     
+     if(event.includes("amzn") || event.includes("amazon") || event.includes("a.co"))
+    {
+      await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/amazongrab", {method: "POST", body:event}).then(async(res) => {
+        data = await res.text() as string
+
+      })
+      router.push(`/search/${data ? data.replace(/['"]/g, '') : "error"}`)
+
+      return
+    }
+    
     if(!event.includes("http"))
     {
-      setLD((ld) => !ld)
       await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/shopping", {method: "POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async (res) => {
         data = await res.text()
         
+        
       })
-      setLD((ld) => !ld)
       router.push(`/search/${data}`)
       return
     }
