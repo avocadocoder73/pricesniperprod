@@ -11,6 +11,9 @@ import { Input } from '@/components/ui/input'
 import { Image } from "lucide-react";
 import { Search } from "lucide-react";
 import { LoadingSpinner } from '@/components/ui/spinner'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
+import { X } from 'lucide-react'
+
 type Product = {
   companyimg: string
   companyname : string;
@@ -303,7 +306,12 @@ export default function SearchStuff()
             }} id="imgupload" type="file" className="hidden"></Input>
             </form>
         </div></div></div>
-    <DataTable columns={columns} data={data}></DataTable>
+    {data.length === 0 ?  <Card style={{background: "transparent"}} className='w-full h-screen'>
+      <CardContent className='w-full h-full flex flex-col justify-center items-center'>
+          <X size={100}></X>
+          <div className='font-SB'>We were unable to load results. Please try again</div>
+      </CardContent>
+    </Card> : <DataTable columns={columns} data={data}></DataTable>}
  
     </div>)
 }

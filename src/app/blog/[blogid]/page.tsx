@@ -25,7 +25,7 @@ function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid:
 
     return (
         <Link href={`/blog/${blogid}`}>
-        <Card className="w-full">
+        <Card className="w-full bg-transparent">
             <CardHeader className="flex-row flex">
                     <img src={`https://d33mn5vlirq551.cloudfront.net/blog${blogid}.jpg`} className="w-1/2 h-[10vw] border-black border-[2px] rounded-md"></img>
                     <div className="w-1/3 ml-[1vw] flex flex-col">
@@ -189,7 +189,7 @@ const processText = (text: any) => {
 {main ? <div className="w-full h-full flex flex-col lg:flex-row">
     
         <div className="h-full w-full md:w-3/5 md:ml-[10vw]">
-            <Card className="border-0 bg-[#fff8f8]">
+            <Card className="border-0 ">
                     <CardHeader className="w-full">
                             <img src={`https://d33mn5vlirq551.cloudfront.net/blog${main.blogid}.jpg`} className="w-full h-[50vw] md:h-[25vw] border-black border-[2px] rounded-sm"></img>
                             <CardTitle className="font-SB">{main?.title}</CardTitle>
@@ -211,7 +211,7 @@ const processText = (text: any) => {
             </Card>
         </div>
         {!mobile ? <div className="flex flex-row lg:flex-col items-center h-full w-full lg:w-2/5 ml-[1vw]">
-            <Card className="w-full flex flex-row flex-wrap lg:flex-col justify-center rounded-3xl items-center">
+            <Card className="w-full bg-transparent flex flex-row flex-wrap lg:flex-col justify-center rounded-3xl items-center">
                 <CardHeader>
                     <CardTitle>Latest</CardTitle>
                 </CardHeader>
@@ -239,7 +239,7 @@ const processText = (text: any) => {
         </div> : <div></div>}
 
 
-    </div> : <LoadingSpinner size={50} color="black"></LoadingSpinner>} 
+    </div> : <div className="w-full h-screen flex flex-col justify-center items-center"><LoadingSpinner size={50} color="black"></LoadingSpinner><div className="font-SB text-black">Sit tight! We are loading this blogpost</div></div>} 
 
      <div className="h-[40vw] md:h-[10vw] pt-[3vw] pb-[2vw] items-center flex flex-col border-t-4 border-t-[#fec5bb] bg-[#fae1dd] text-black">
       <div className="flex flex-row items-center  justify-around w-full">

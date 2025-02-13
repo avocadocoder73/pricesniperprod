@@ -26,7 +26,7 @@ function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid:
 
     return (
         <Link href={`/blog/${blogid}`}>
-        <Card className="w-full">
+        <Card className="w-full bg-transparent">
             <CardHeader className="flex-row flex">
                     <img src={`https://d33mn5vlirq551.cloudfront.net/blog${blogid}.jpg`} className="w-1/2 h-1/2 lg:h-[10vw] border-black border-[2px] rounded-md"></img>
                     <div className="w-full md:w-1/3 ml-[1vw] flex flex-col">
@@ -82,7 +82,7 @@ useEffect(() => {
 
 <div className="w-full h-full items-center lg:items-start flex flex-col lg:flex-row ">
         <div className="h-full w-full md:w-3/5 md:ml-[10vw]">
-            <Card className="border-0 bg-[#fff8f8]">
+            <Card className="border-0 bg-transparent" >
                     <CardHeader className="w-full">
                             <img src="/BLOG_picture.png" className="w-full md:h-[25vw] border-black border-[2px] rounded-sm"></img>
                             <CardTitle className="font-SB">PeachyPrices Blog</CardTitle>
@@ -101,7 +101,7 @@ useEffect(() => {
             </Card>
         </div>
         <div className="flex flex-col items-center h-full w-full lg:w-2/5 ml-[1vw]">
-            <Card className="w-full flex flex-col justify-center rounded-3xl items-center">
+            <Card className="w-full flex flex-col justify-center bg-transparent rounded-3xl items-center">
                 <CardHeader>
                     <CardTitle>Latest</CardTitle>
                 </CardHeader>

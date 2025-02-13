@@ -82,6 +82,12 @@ export default function Home() {
           
           for (let i = 0; i < resp.length; i++)
           {
+            
+            if(resp[i].data == "[]")
+            {
+              continue
+            }
+            
             let dat = resp[i].data.find((item : any) => item.img)
           
             
