@@ -63,9 +63,9 @@ export default function Privacy()
               
             </div>
             <div className="flex flex-row md:gap-x-3 justify-center w-1/3">
-            <Tiktok width={25} height={25}></Tiktok>
-            <Twitter width={25} height={25}></Twitter>
-            <Instagram width={25} height={25}></Instagram>
+            <Link target="_blank" href="https://www.tiktok.com/@peachypricesofficial"><Tiktok  width={25} height={25}></Tiktok></Link>
+            <Link target="_blank"   href="https://x.com/PeachyPrices"><Twitter width={25} height={25}></Twitter></Link>
+            <Link target="_blank"  href="https://www.instagram.com/peachypricesofficial/"><Instagram width={25} height={25}></Instagram></Link>
             </div>
             
         </div>
