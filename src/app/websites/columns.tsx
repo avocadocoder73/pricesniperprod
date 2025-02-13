@@ -39,7 +39,7 @@ export const columns : ColumnDef<Entry>[] = [
         header: ({column}) => {
 
             let sorted = column.getIsSorted()
-            let color = sorted ? (!(sorted === 'asc') ? 'bg-[#f48889] text-white' : 'bg-white text-black') : ''
+            let color = sorted ? (!(sorted === 'asc') ? 'bg-[#f48889] text-white' : 'bg-white text-black') : 'bg-[#f48889] text-white'
             return (
                    <Button
                    
@@ -115,9 +115,12 @@ export const columns : ColumnDef<Entry>[] = [
         accessorKey: "price",
         header: ({column}) => {
 
+            let sorted = column.getIsSorted()
+            let color = sorted ? (!(sorted === 'asc') ? 'bg-[#f48889] text-white' : 'bg-white text-black') : 'bg-[#f48889] text-white'
+
             return (
                    <Button
-                   className="text-white bg-[#f48889] md:text-lg  text-xs"
+                   className={`${color} md:text-lg  text-xs`}
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                     >
@@ -173,6 +176,8 @@ export const columns : ColumnDef<Entry>[] = [
         },
         sortingFn: (rowA, rowB, columnId) => {
             // Strip the $ sign and convert to a float for comparison
+            if (rowA.index === 0) return -1; 
+           if (rowB.index === 0) return 1;  
             const priceA = parseFloat((rowA.getValue(columnId) as any ).replace(/\$/, ""));
             const priceB = parseFloat((rowB.getValue(columnId) as any).replace(/\$/, ""));
             

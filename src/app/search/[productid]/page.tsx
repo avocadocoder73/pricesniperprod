@@ -32,8 +32,7 @@ export default function SearchStuff()
     const [affil, setAffil] = useState<Record<string, any>>({})
     const [ld, setLD] = useState(false)
     const [o, setO] = useState(false)
-    const [error, setError] = useState(false)
-    const [errormsg, setErrorMsg] = useState('')
+    const [load, setLoad] = useState(false)
     const [url, setURL] = useState('')
     const [image, setImage] = useState<string | null>(null);
     const [tiktokURLdat, settiktokURL] = useState('')
@@ -71,8 +70,8 @@ export default function SearchStuff()
 
     useEffect(() => {
 
-        let url = window.location.href
-
+      let url = window.location.href
+      setLoad(true)
        let base64String = url.split("/")[4]
 
           fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getiddata", {method:"POST", headers: { "Content-Type": "text/plain"}, body:base64String}).then(async(res) => {
@@ -105,14 +104,16 @@ export default function SearchStuff()
 
             setData(data)
             
-        }).catch((err) => console.log(err))
+        }).catch((err) => console.log(err)).finally(() => {
+          setLoad(false)
+        })
 
     }, [affil])
 
 
     const callApi = async (event : any) => {
     
-    setError(false)
+    
     setO(true)
     let payload = (await setImg(event)) as string
     try {
@@ -152,8 +153,8 @@ export default function SearchStuff()
      
     }
     
-    ).catch((err) => {console.log(err); setError(true);
-      setErrorMsg("Failed to fetch products. Check console for more")})
+    ).catch((err) => {console.log(err); 
+      })
     console.log(data)
     router.push(`/search/${data}`)
 
@@ -306,7 +307,7 @@ export default function SearchStuff()
             }} id="imgupload" type="file" className="hidden"></Input>
             </form>
         </div></div></div>
-    {data.length === 0 ?  <Card style={{background: "transparent"}} className='w-full h-screen'>
+    {data.length == 0 && !load ?  <Card style={{background: "transparent"}} className='w-full h-screen'>
       <CardContent className='w-full h-full flex flex-col justify-center items-center'>
           <X size={100}></X>
           <div className='font-SB'>We were unable to load results. Please try again</div>
