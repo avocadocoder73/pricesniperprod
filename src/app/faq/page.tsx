@@ -23,7 +23,7 @@ let list = [{title: "What is Peachy Prices", content: "PeachyPrices is a tool th
 
 export default function FAQ()
 {
-    return (<div className="h-full bg-[#ffe4e1]"><div  className='flex h-max items-center p-4 border-b-[#fec5bb] border-b-4'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-8'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><div className='w-full flex flex-row items-center justify-center'>
+    return (<div className="h-full bg-[#ffe4e1]"><div  className='flex h-max items-center p-4 border-b-[#fec5bb] border-b-4'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-8'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link><div className='w-full flex flex-row items-center justify-center'>
         
         </div></div></div>
         <div style={{background: "#fff8f8", backgroundPosition: "bottom", // Ensures gradient starts at the bottom
@@ -51,18 +51,17 @@ export default function FAQ()
             </div>
             <div className="flex flex-col w-1/3 items-center">
             <div className="flex flex-col md:flex-row md:gap-x-5 items-center md:justify-around">
-              <div className="font-SB">About</div>
-              <div className="font-SB">Blog</div>
-              <div className="font-SB">Contact</div>
-              <div className="font-SB">Privacy</div>
-              <div className="font-SB">Terms</div>
+              <Link href={'/'}><div className="font-SB">Home</div></Link>
+              <Link href={'/blog'}><div className="font-SB">Blog</div></Link>              
+              <Link href={'/privacy'}><div className="font-SB">Privacy</div></Link>
+              <Link href={'/terms'}><div className="font-SB">Terms</div></Link>                                                  
             </div>
               
             </div>
             <div className="flex flex-row md:gap-x-3 justify-center w-1/3">
-            <Tiktok width={25} height={25}></Tiktok>
-            <Twitter width={25} height={25}></Twitter>
-            <Instagram width={25} height={25}></Instagram>
+            <Link target="_blank" href="https://www.tiktok.com/@peachypricesofficial"><Tiktok  width={25} height={25}></Tiktok></Link>
+            <Link target="_blank"   href="https://x.com/PeachyPrices"><Twitter width={25} height={25}></Twitter></Link>
+            <Link target="_blank"  href="https://www.instagram.com/peachypricesofficial/"><Instagram width={25} height={25}></Instagram></Link>
             </div>
             
         </div>

@@ -62,7 +62,11 @@ export default function Blog() {
             throw new Error(`HTTP error! Status: ${resp.status}`);
         }
 
-        const data = await resp.json();
+        let data = await resp.json();
+
+
+        data = data.sort((a: any, b: any) => new Date(parseInt(b?.date) * 1000).getTime() - new Date(parseInt(a?.date) * 1000).getTime());
+
         setBlogItems(data)
     } catch (err) {
         console.error("Fetch error:", err);

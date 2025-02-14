@@ -32,7 +32,7 @@ function BlogItems({title, date, blogid, time }: {title: any; date: any, blogid:
                     <div className="w-full flex flex-row justify-between items-center">
                         <CardDescription className="text-black text-lg">{time.split('.')[0]}</CardDescription>
                         <Separator className="w-2 bg-black"></Separator>
-                        <CardDescription className="text-black text-lg">{new Date(parseInt(date)).toLocaleString('en-US', {year: 'numeric',month: 'short',day: 'numeric',})}</CardDescription>
+                        <CardDescription className="text-black text-lg">{new Date(parseInt(date) * 1000).toLocaleString("en-US", { year: "numeric", month: "short", day: "numeric"})}</CardDescription>
                     </div>
                         <CardTitle>{title}</CardTitle>
                     </div>
@@ -65,6 +65,8 @@ export default function BlogPage() {
             }
 
             const data = await resp.json();
+
+            
 
             setMain(data.blog)
 
@@ -173,7 +175,11 @@ const processText = (text: any) => {
             throw new Error(`HTTP error! Status: ${resp.status}`);
         }
 
-        const data = await resp.json();
+        let data = await resp.json();
+
+        data = data.sort((a: any, b: any) => new Date(parseInt(b?.date) * 1000).getTime() - new Date(parseInt(a?.date) * 1000).getTime());
+
+
         setBlogItems(data)
     } catch (err) {
         console.error("Fetch error:", err);

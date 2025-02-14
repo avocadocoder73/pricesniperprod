@@ -59,7 +59,7 @@ export default function SearchStuff()
 
         setAffil(newAffil);
 
-        console.log(affil)
+        
        
 
       
@@ -77,7 +77,7 @@ export default function SearchStuff()
           fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getiddata", {method:"POST", headers: { "Content-Type": "text/plain"}, body:base64String}).then(async(res) => {
 
             let data = await res.json()
-            console.log(data)
+        
             data = data.filter((item : Product) => (item).price != null ) as []
 
             data = data.filter((item : Product) => (item).img != "data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==") as []
@@ -96,7 +96,7 @@ export default function SearchStuff()
                 }
                 return updatedItem;
                 });
-            console.log(data)
+         
             data = data.map((item : any) => ({
               ...item,
               price: item.price // Extracts only the first price
@@ -145,7 +145,7 @@ export default function SearchStuff()
       
        data = await res.text()
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
-      console.log(data)
+   
       
       
      
@@ -155,7 +155,7 @@ export default function SearchStuff()
     
     ).catch((err) => {console.log(err); 
       })
-    console.log(data)
+    
     router.push(`/search/${data}`)
 
     

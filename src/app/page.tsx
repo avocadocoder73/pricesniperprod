@@ -325,7 +325,7 @@ export default function Home() {
         
           <div onClick={() => document.getElementById("how")?.scrollIntoView({behavior: "smooth" })}  className='font-MD text-[13px] cursor-pointer  hover:text-[#fa9886]'>How it works</div>
 
-       </CardContent> : <LoadingSpinner size={100}></LoadingSpinner>}
+       </CardContent> : <div><LoadingSpinner size={100}></LoadingSpinner><div>Sit tight. We are looking up the best deals</div></div>}
 
     </Card>
     <div className="relative w-full h-screen">
@@ -376,8 +376,8 @@ export default function Home() {
       >
         <Step
           img={<Clipboard className="h-[16vw]" />}
-          header="1. Paste a product link"
-          content="Found something you want to buy? Copy the link of the product and paste it into our search bar."
+          header="1. Find a product"
+          content="Found something you want to buy? Copy the link, type some text, or upload an image of the product into our search bar.."
         ></Step>
         <Step
           img={<Searching className="h-[16vw]" />}
