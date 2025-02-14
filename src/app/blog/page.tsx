@@ -8,6 +8,8 @@ import { Separator } from "@/components/ui/separator"
 import Twitter from "@/app/images/x"
 import Instagram from "@/app/images/instagram"
 import Tiktok from "@/app/images/tiktok"
+import Search from "@/components/custom/search"
+import SearchBar from "@/components/custom/search"
 
 export type Blog = {
     author : String,
@@ -82,7 +84,7 @@ useEffect(() => {
 
 
 
-    return (<div className='min-h-screen w-full bg-[#fff8f8] '><div className='flex h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link></div></div>
+    return (<div className='min-h-screen w-full bg-[#fff8f8] '><div className='flex border-b-[#fec5bb] border-b-2 h-max items-center p-4'><Peach onClick={() => window.location.href = "/"} style={{marginRight: "3%", cursor:"pointer"}} className="w-[35px] md:w-[50px]"></Peach><div className='flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link></div><SearchBar></SearchBar></div>
 
 <div className="w-full h-full items-center lg:items-start flex flex-col lg:flex-row ">
         <div className="h-full w-full md:w-3/5 md:ml-[10vw]">

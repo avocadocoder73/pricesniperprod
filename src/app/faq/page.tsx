@@ -14,7 +14,7 @@ import Twitter from "../images/x"
 import { useState } from 'react';
 
 let list = [{title: "What is Peachy Prices", content: "PeachyPrices is a tool that helps you find cheaper options or alternatives for the products you love. Simply paste a link or photo of a product, and we’ll do the searching for you!"},
-    {title: "How does it work?", content: "Using PeachyPrices is simple:\nCopy and paste a product link or image into the search bar.\nOur tool scans the web for cheaper prices or similar alternatives.\nCompare your options and choose the best deal!"},
+    {title: "How does it work?", content: "Using PeachyPrices is simple:\nCopy and paste a product link, Upload an image into the search bar, or search an item using.\nOur tool scans the web for cheaper prices or similar alternatives.\nCompare your options and choose the best deal!"},
     {title: "Is it free?", content: "Yes! PeachyPrices is completely free to use. Start saving without any hidden costs."},
     {title: "How can I contact support?", content: "If you have questions, suggestions, or need help, please contact us at support@peachyprices.com"},
     {title: "Is my personal information safe", content: "Absolutely. PeachyPrices does not store any of your personal information. For more details, please see our Privacy Policy."},
@@ -23,7 +23,7 @@ let list = [{title: "What is Peachy Prices", content: "PeachyPrices is a tool th
 
 export default function FAQ()
 {
-    return (<div className="h-full bg-[#ffe4e1]"><div  className='flex h-max items-center p-4 border-b-[#fec5bb] border-b-4'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-8'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link><div className='w-full flex flex-row items-center justify-center'>
+    return (<div className="h-full"><div  className='flex h-max items-center p-4 border-b-[#fec5bb] border-b-2'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link><div className='w-full flex flex-row items-center justify-center'>
         
         </div></div></div>
         <div style={{background: "#fff8f8", backgroundPosition: "bottom", // Ensures gradient starts at the bottom
