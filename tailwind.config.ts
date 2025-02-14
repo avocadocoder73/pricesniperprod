@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		clipPath: {
+			'inset-10': 'inset(0 10%)',
+			'inset-5' : 'inset(0 5%)'
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -80,11 +84,17 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
-  			}
+  			},			
+			'myAnim': {
+         '0%': { opacity: '0', transform: 'translateY(50px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
   		},
+		
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+			 'myAnim': 'myAnim 1.2s ease-out forwards',
   		}
   	}
   },

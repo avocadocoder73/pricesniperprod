@@ -67,7 +67,7 @@ export default function RootLayout({
         </Script>
         
       </head>
-        <body className="min-h-screen overflow-x-hidden">
+        <body className="min-h-screen ">
         {children}
         </body>
     </html>

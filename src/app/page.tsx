@@ -36,6 +36,7 @@ import { LoadingSpinner } from "@/components/ui/spinner";
 import { Image } from "lucide-react";
 import { Search } from "lucide-react";
 import Footer from "@/components/custom/footer";
+import { Separator } from "@radix-ui/react-separator";
 type Product = {
   companyimg: string
   companyname : string;
@@ -91,7 +92,7 @@ export default function Home() {
             let dat = resp[i].data.find((item : any) => item.img)
           
             
-            setTrending((trending : any) => [...trending, <a href={`/search/${resp[i].id}`} target="_blank" rel="noopener noreferrer"><div  className="bg-white rounded-xl flex flex-row justify-center items-center h-4/5 w-4/5 border-[0.2vw] border-[#fcd5ce]">
+            setTrending((trending : any) => [...trending, <a href={`/search/${resp[i].id}`} target="_blank" rel="noopener noreferrer"><div  className="bg-white rounded-xl flex flex-row justify-center items-center h-5/6 w-5/6  border-[0.2vw] border-[#fcd5ce]">
   <img
     style={{objectFit: "contain", width: "100%", height: "100%" }}
     className="rounded-xl"
@@ -291,7 +292,7 @@ export default function Home() {
     <Card className='flex flex-col justify-center items-center bg-clear border-none shadow-none'>
         <CardHeader className='flex flex-row items-center'>
            <div className='text-[#fec5bb] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Peachy</div>
-            <Peach className="w-[100px] h-[40px] md:h-[50px]" style={{marginRight:"-12px"}}></Peach>
+            <Peach className="w-[100px] h-[40px] md:h-[50px]"></Peach>
             <div className='text-[#fec89a] text-3xl lg:text-6xl flex-wrap text-center font-SB italic'>Prices</div>
         </CardHeader>
          <CardDescription className='text-[22px] text-[#a5c8b3] font-SB italic'>Your shortcut to savings</CardDescription>
@@ -327,59 +328,89 @@ export default function Home() {
        </CardContent> : <LoadingSpinner size={100}></LoadingSpinner>}
 
     </Card>
-    <div className=''>
-    <div className='bg-[#fa9886] border-[3px] border-[#FE8671] absolute w-[110vw] h-[100vh] inset-y-7/9 -translate-x-1/2 left-1/2 rounded-t-full mt-5 shadow-[0px_-4px_202px_20px_#fa9886]'>
-    <div className='flex flex-col items-center overflow-x-hidden'>
-          <div className='text-white font-SB text-5xl max-md:text-3xl mb-[3vw] max-sm:text-lg mt-[3.5vw]'>Trending Searches</div>
-          <div className="w-[50vw] md:w-[45vw] flex flex-row mt-[-1vw] justify-center"> 
-          <Carousel plugins={[ Autoplay({
-          delay: 25000,
-          
-        }),]} opts={{
-          loop: true
-       
-        
-      }}>
-            <CarouselContent>
-              
-          
+    <div className="relative w-full h-screen">
+  {/* Background */}
+  <div className="bg-[#fa9886] border-[3px] border-[#FE8671] w-full min-h-screen rounded-t-full mt-5 shadow-[0px_-4px_202px_20px_#fa9886] top-0 left-0 z-0">
+    
+    
+    <div className="flex flex-col items-center w-full pt-[3.5vw] z-10">
+    <div className="text-white z-30 font-SB text-5xl max-md:text-3xl mb-[3vw] max-sm:text-lg mt-[3.5vw]">
+      Trending Searches
+    </div>
+
+    {/* Carousel */}
+    <div className="w-[50vw] md:w-[45vw] flex flex-row mt-[-1vw] justify-center">
+      <Carousel plugins={[Autoplay({ delay: 25000 })]} opts={{ loop: true }}>
+        <CarouselContent>
           {trending.length > 0 ? (
             trending.map((item, index) => (
-              <CarouselItem
-                key={index}
-                className="basis-1/3"
-              >
+              <CarouselItem key={index} className="basis-1/3">
                 {item}
               </CarouselItem>
-              
             ))
           ) : (
-            <div className="h-[15vw] w-[20vw] flex items-center justify-center"><LoadingSpinner className="h-[10vw] w-[10vw]"></LoadingSpinner></div>
+            <div className="h-[15vw] w-[20vw] flex items-center justify-center">
+              <LoadingSpinner className="h-[10vw] w-[10vw]" />
+            </div>
           )}
-           
-            </CarouselContent>
-              <CarouselPrevious className="border-white border-2" />
-              <CarouselNext className="border-white border-2" />
-          </Carousel>
-          </div>
-          
+        </CarouselContent>
+        <CarouselPrevious className="border-white border-2" />
+        <CarouselNext className="border-white border-2" />
+      </Carousel>
     </div>
-    <div className="relative w-full flex justify-center overflow-hidden">
-  <div className="w-[94.7vw] h-[0.1vw] bg-white shadow-[0px_0px_3px_1px_#ffffff]"
-    >
-</div>
-    </div>   
-    <div className='relative text-3xl w-full h-[2vw] text-white font-SB mt-[2vw] text-center'>How it works</div>
-    <div id="how" className='flex flex-col md:space-x-3 w-full pb-5 md:mb-0 md:pb-[5vw] md:mt-[1vw] mt-[10vw] items-center md:justify-center md:flex-row bg-[#fa9886]'>
-          <Step  img={<Clipboard className='h-[16vw]'></Clipboard>} header="1. Paste a product link" content="Found something you want to buy? Copy the link of the product and paste it into our search bar."></Step>
-          <Step img={<Searching className='h-[16vw]'></Searching>} header="2. Let us do the searching" content="We'll instantly scan the web to find cheaper prices or similar alternatives for the product you love."></Step>
-          <Step img={<Results className= 'w-[18vw] h-[16vw]' ></Results>} header="3. Compare your options" content="Review the results and choose the deal that works best for you. Saving money has never been this easy!"></Step>
-          <Step  img={<Bag className='h-[16vw]'></Bag>} header="4. Shop smart" content="Click on your preferred deal and complete your purchase. More savings mean more shopping power for you!"></Step>
-    </div>
-        <Footer></Footer>
+
+    {/* Separator */}
+    <Separator
+      style={{
+        clipPath: "inset(0 10%)",
+      }}
+      className="bg-white mt-[12vw] md:mt-0 h-1 w-full z-10"
+    ></Separator>
+
+    <div className="relative z-10 w-full text-center mt-[2vw]">
+      <div className="text-3xl text-white font-SB">How it Works</div>
+
+      <div
+        id="how"
+        className="flex flex-col md:space-x-3 w-full pb-5 md:mb-0 md:mt-[1vw] items-center md:justify-center md:flex-row bg-transparent"
+      >
+        <Step
+          img={<Clipboard className="h-[16vw]" />}
+          header="1. Paste a product link"
+          content="Found something you want to buy? Copy the link of the product and paste it into our search bar."
+        ></Step>
+        <Step
+          img={<Searching className="h-[16vw]" />}
+          header="2. Let us do the searching"
+          content="We'll instantly scan the web to find cheaper prices or similar alternatives for the product you love."
+        ></Step>
+        <Step
+          img={<Results className="w-[18vw] h-[16vw]" />}
+          header="3. Compare your options"
+          content="Review the results and choose the deal that works best for you. Saving money has never been this easy!"
+        ></Step>
+        <Step
+          img={<Bag className="h-[16vw]" />}
+          header="4. Shop smart"
+          content="Click on your preferred deal and complete your purchase. More savings mean more shopping power for you!"
+        ></Step>
+        
+      </div>
+     
     </div>
     
-    </div> 
+    
+      </div>
+
+  
+    
+  </div>
+   <Footer>
+
+      </Footer>
+</div>
+
+   
     
    </div>
    
