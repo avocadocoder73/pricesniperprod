@@ -47,15 +47,17 @@ export default function SearchBar()
     
     
     var data;
-    
+    var item : any
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getproducts", {method:"POST", headers: { "Content-Type": "text/plain"}, body:payload}).then(async(res) => 
     {
       
        data = await res.text()
-      const params = new URLSearchParams(JSON.stringify(data)).toString();
+     
+       item = await JSON.parse(data)
       
-      
-      
+     
+
+      localStorage.setItem("searchimage", item.searchIMG)
      
       
      
@@ -65,7 +67,7 @@ export default function SearchBar()
       
      })
     
-    router.push(`/search/${data}`)
+    router.push(`/search/${item.item}`)
 
     
     return

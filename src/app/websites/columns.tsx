@@ -176,8 +176,7 @@ export const columns : ColumnDef<Entry>[] = [
         },
         sortingFn: (rowA, rowB, columnId) => {
             // Strip the $ sign and convert to a float for comparison
-            if (rowA.index === 0) return -1; 
-           if (rowB.index === 0) return 1;  
+           
             const priceA = parseFloat((rowA.getValue(columnId) as any ).replace(/\$/, ""));
             const priceB = parseFloat((rowB.getValue(columnId) as any).replace(/\$/, ""));
             

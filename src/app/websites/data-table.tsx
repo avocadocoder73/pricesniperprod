@@ -55,49 +55,15 @@ export function DataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
         table.getRowModel().rows.map((row, index) => 
           index === 0 ? (
-            <div className="">
-               <TableRow
-            className="flex flex-row h-auto bg-[white] mb-[5vw] rounded-3xl" 
-            id={index.toString()}
-            key={row.id}
-            data-state={row.getIsSelected() && "selected"}
-          >
-            {row.getVisibleCells().map((cell, cindex) => (
-              cindex === 0 ? (
-                // Render the first cell as is
-                <TableCell className="w-auto border-[0.3vw] rounded-l-2xl border-[#fa9886] " key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  
-                </TableCell>
-                
-              ) : null // Skip rendering here; render remaining cells later
-            ))}          
-            <div className="w-full bg-[#fec5bb] flex flex-col border-[0.3vw] border-l-0 rounded-l-none rounded-r-2xl border-[#fa9886] ">
-              {row.getVisibleCells().map((cell, cindex) =>
-                {
-                if (cindex > 0 && cindex < 3) {
-
-                  console.log(flexRender(cell.column.columnDef.cell, cell.getContext()))
-
-                return (
-                  <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                );
-              } else if (cindex === 3) {
-                return (
-                  <TableCell className="h-full" key={cell.id}>
-                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                );
-              } else {
-                return null;
-              }
-                }
-              )}
-            </div>
-            
-          </TableRow>
+            <div>
+           {localStorage.getItem("searchimage") ? (
+              <div className="w-full h-52 flex flex-col items-center mb-[10vw] md:mb-[5vw] justify-center">
+                <img className="w-auto h-full border-[0.3vw] rounded-2xl border-[#fa9886] border-" src={`${localStorage.getItem("searchimage")}`}></img>
+                <div className="font-SB text-xl">Your Search</div>
+              </div>
+            ) : (
+              <div></div>
+            )}
           <div className="font-SB mb-[3vw] text-[0.6rem] md:text-[1rem] text-black mt-[-3vw]">*PeachyPrices may earn a commission on purchases made through links to participating retailers on this site. This doesn’t affect the products or prices shown, or the order in which they appear. The commission helps keep the site running. Thanks for supporting us!</div>
           <TableHeader className="w-full">
            {table.getHeaderGroups().map((group) => (

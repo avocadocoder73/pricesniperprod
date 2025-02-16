@@ -139,14 +139,17 @@ export default function SearchStuff()
     
     
     var data;
-    
+    var item : any
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/getproducts", {method:"POST", headers: { "Content-Type": "text/plain"}, body:payload}).then(async(res) => 
     {
       
        data = await res.text()
+
+      item = await JSON.parse(data)
+
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
    
-      
+       localStorage.setItem("searchimage", item.searchIMG)
       
      
       
@@ -156,7 +159,7 @@ export default function SearchStuff()
     ).catch((err) => {console.log(err); 
       })
     
-    router.push(`/search/${data}`)
+    router.push(`/search/${item.item}`)
 
     
     return
