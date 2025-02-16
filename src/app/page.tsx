@@ -207,7 +207,8 @@ export default function Home() {
 
   const tiktokURL = async(event : any) => {
     
-    var data = '' 
+    var data = ''
+    let parseddata: Record<string, any> = {}    
     setLD(true)
     
     try {
@@ -215,10 +216,13 @@ export default function Home() {
     if(event.includes("amzn") || event.includes("amazon") || event.includes("a.co"))
     {
       await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/amazongrab", {method: "POST", body:event}).then(async(res) => {
-        data = await res.text() as string
+        data = await res.text()
 
+        parseddata = JSON.parse(data)
+        
+        localStorage.setItem("searchimage", parseddata.searchIMG)
       })
-      router.push(`/search/${data ? data.replace(/['"]/g, '') : "error"}`)
+      router.push(`/search/${parseddata.item}`)
 
       return
     }
@@ -239,7 +243,9 @@ export default function Home() {
       
       data = await res.text()
 
-      
+      parseddata = JSON.parse(data)
+
+      localStorage.setItem("searchimage", parseddata.searchIMG)
       
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
      
@@ -287,7 +293,7 @@ export default function Home() {
       setLD(false)
     }
       
-    router.push(`/search/${data}`)
+    router.push(`/search/${parseddata.item}`)
   }
 
 //className="-ml-4 max-w-5xl flex flex-row mt-[3vw] justify-center"

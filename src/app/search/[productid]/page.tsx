@@ -200,16 +200,19 @@ export default function SearchStuff()
   const tiktokURL = async(event : any) => {
     
     var data = ''
-    
+    let parseddata: Record<string, any> = {}    
+    setLD(!ld)
     try {
     
      if(event.includes("amzn") || event.includes("amazon") || event.includes("a.co"))
     {
       await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/amazongrab", {method: "POST", body:event}).then(async(res) => {
         data = await res.text() as string
-
+        parseddata = JSON.parse(data)
+        
+        localStorage.setItem("searchimage", parseddata.searchIMG)
       })
-      router.push(`/search/${data ? data.replace(/['"]/g, '') : "error"}`)
+      router.push(`/search/${parseddata.item}`)
 
       return
     }
@@ -230,7 +233,9 @@ export default function SearchStuff()
       
       data = await res.text()
 
-      
+      parseddata = JSON.parse(data)
+
+      localStorage.setItem("searchimage", parseddata.searchIMG)
       
 //      const params = new URLSearchParams(JSON.stringify(data)).toString();
      
@@ -277,8 +282,7 @@ export default function SearchStuff()
       
      
     }
-      
-    router.push(`/search/${data}`)
+    router.push(`/search/${parseddata.item}`)
   }
 
     //   <DataTable columns={columns} data={}></DataTable>
