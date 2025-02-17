@@ -29,7 +29,7 @@ export default function SearchStuff()
 
     const [data, setData] = useState([])
 
-    const [affil, setAffil] = useState<Record<string, any>>({})
+    
     const [ld, setLD] = useState(false)
     const [o, setO] = useState(false)
     const [load, setLoad] = useState(false)
@@ -41,32 +41,7 @@ export default function SearchStuff()
         [key: string]: any;
     }
 
-    useEffect(() => {
-
-        const fetchData = async() =>
-            {
-
-            
-
-        const res1 = await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/afil");
-        const resp = await res1.json();
-
-      // Process the affiliate data
-      const newAffil = Object.keys(resp).reduce((acc: any, key) => {
-        acc[key] = resp[key];
-        return acc;
-      }, {});
-
-        setAffil(newAffil);
-
-        
-       
-
-      
-    }
-    fetchData()
-    
-    }, [])
+   
 
     useEffect(() => {
 
@@ -86,16 +61,7 @@ export default function SearchStuff()
 
             data = data.filter((item : Product) => (item).img != null) as []
             
-            data = data.map((item : Product) => {
-                let updatedItem = { ...item };
-                for (const key in affil) {
-                   
-                    if (updatedItem.productlink.toLowerCase().includes(key)) {
-                        updatedItem.productlink = updatedItem.productlink + affil[key] 
-                    }
-                }
-                return updatedItem;
-                });
+            
          
             data = data.map((item : any) => ({
               ...item,
@@ -108,7 +74,7 @@ export default function SearchStuff()
           setLoad(false)
         })
 
-    }, [affil])
+    }, [])
 
 
     const callApi = async (event : any) => {
