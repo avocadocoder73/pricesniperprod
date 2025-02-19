@@ -61,7 +61,14 @@ export default function SearchStuff()
 
             data = data.filter((item : Product) => (item).img != null) as []
             
-            
+            const seen = new Set<string>();
+            data = data.filter((item: Product) => {
+              if (seen.has(item.productlink)) {
+                return false; 
+              }
+              seen.add(item.productlink);
+              return true;
+            }) as [];
          
             data = data.map((item : any) => ({
               ...item,
