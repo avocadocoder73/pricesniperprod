@@ -57,7 +57,7 @@ export function DataTable<TData, TValue>({
           index === 0 ? (
             <div>
            {localStorage.getItem("searchimage") ? (
-              <div className="w-full max-h-[30%] flex flex-col items-center mb-[10vw] md:mb-[5vw] justify-center">
+              <div className="w-full max-h-[10rem] md:max-h-[30%] flex flex-col items-center mb-[10vw] md:mb-[5vw] justify-center">
                 <img className="max-w-[25%] h-full border-[0.3vw] rounded-2xl border-[#fa9886] border-" src={`${localStorage.getItem("searchimage")}`}></img>
                 <div className="font-SB text-lg">Your Search</div>
               </div>
