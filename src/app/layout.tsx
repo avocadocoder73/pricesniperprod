@@ -44,6 +44,7 @@ export default function RootLayout({
     
     <html lang="en" className="min-h-screen">
       <head>
+        <meta name="msvalidate.01" content="DBB729304426E515E9D566D7AC6AC89B" />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=G-YDY00DSFXS`} strategy="afterInteractive"/>
         <Script id="google-analytics" strategy="afterInteractive">
           {
