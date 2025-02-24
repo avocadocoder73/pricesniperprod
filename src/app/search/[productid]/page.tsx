@@ -200,6 +200,19 @@ export default function SearchStuff()
       router.push(`/search/${data}`)
       return
     }
+    if(!event.includes("tiktok"))
+    {
+     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/omni", {method: "POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async (res) => {
+        data = await res.text()
+        
+        parseddata = JSON.parse(data)
+
+      localStorage.setItem("searchimage", parseddata.searchIMG)
+
+      })
+      router.push(`/search/${parseddata.item}`)
+      return
+    }
     
     await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/tiktoklink", {method:"POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async(res) => 
     {
