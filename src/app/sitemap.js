@@ -11,15 +11,16 @@ async function getAllBlogSlugs()
 
         let data = await resp.json();
 
-
+        for(const item of data)
+        {
+          console.log(item.blogid)
+        }
         
         return data
         
     } catch (err) {
         console.error("Fetch error:", err);
     }
-        
-
   
 }
 
