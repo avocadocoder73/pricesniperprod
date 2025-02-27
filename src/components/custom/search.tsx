@@ -143,7 +143,7 @@ export default function SearchBar()
 
      if(!event.includes("tiktok") && event.incldes)
     {
-      console.log("HERE")
+      
         await fetch("https://wy2zimbxu7.execute-api.us-east-2.amazonaws.com/omni", {method: "POST", headers: { "Content-Type": "text/plain"}, body:event}).then(async (res) => {
         data = await res.text()
         
