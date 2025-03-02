@@ -65,7 +65,7 @@ export default async function sitemap()
       priority: 1.0
     },
     {
-      url: siteUrl + '/blog',
+      url: siteUrl + 'blog',
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8
@@ -77,7 +77,7 @@ export default async function sitemap()
       priority: 0.6
     },
     ...blogPosts.map((slug) => ({
-      url: `${siteUrl}/blog/${slug.blogid}`,
+      url: `${siteUrl}blog/${slug.blogid}`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.7
