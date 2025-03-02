@@ -83,7 +83,7 @@ export default async function sitemap()
       priority: 0.7
     })),
     ...trending.map((slug) => ({
-      url: `${siteUrl}/search/${slug.id}`,
+      url: `${siteUrl}search/${slug.id}`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7
