@@ -22,7 +22,7 @@ export default function RootLayout({
     
     <html lang="en" className="min-h-screen">
       <head>
-        <link rel="canonical" href="https://peachyprices.com/faq"></link>
+        <link rel="canonical" href="https://peachyprices.com/terms"></link>
         <meta name="google-site-verification" content="IbTW9gvpc1l8_7LTk44UnudLIO5HCYA79hHc1ale7-Y" />
         <meta name="msvalidate.01" content="DBB729304426E515E9D566D7AC6AC89B" />
         <title>Faq</title>
