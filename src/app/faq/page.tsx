@@ -23,7 +23,10 @@ let list = [{title: "What is Peachy Prices", content: "PeachyPrices is a tool th
 
 export default function FAQ()
 {
-    return (<div className="h-full"><div  className='flex h-max items-center p-4 border-b-[#fec5bb] border-b-2'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link><div className='w-full flex flex-row items-center justify-center'>
+    return (
+    
+    
+    <div className="h-full"><div  className='flex h-max items-center p-4 border-b-[#fec5bb] border-b-2'><Link href={'/'} style={{marginRight: "3%"}}><Peach width={50}></Peach></Link><div className='flex items-center w-full flex-row space-x-10'><Link className='text-xl font-SB text-[#fec5bb]' href={'/faq'}>FAQ</Link><Link className='text-xl font-SB text-[#fec5bb]' href={'/blog'}>Blog</Link><div className='w-full flex flex-row items-center justify-center'>
         
         </div></div></div>
         <div style={{background: "#fff8f8", backgroundPosition: "bottom", // Ensures gradient starts at the bottom
