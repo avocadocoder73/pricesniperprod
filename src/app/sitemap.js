@@ -71,7 +71,7 @@ export default async function sitemap()
       priority: 0.8
     },
     {
-      url: siteUrl + '/terms',
+      url: siteUrl + 'terms',
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.6
